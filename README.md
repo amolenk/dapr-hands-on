@@ -1,4 +1,4 @@
-# Learning dapr
+# dapr hands-on
 
 This repository contains several hands-on assignments that will introduce you to dapr. You will start with a simple ASP.NET Core application that contains a number of services. In each assignment, you will change a part of the application so it works with dapr (or "rub some dapr on it" as Donovan Brown would say). The dapr features you will be working with are:
 
