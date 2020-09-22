@@ -74,7 +74,7 @@ Make sure you have the following prerequisites installed on your machine:
 
 Every assignment is contained in a separate branch in this repo. Each branch contains the description of the assignment that you can follow. The branch also contains the starting-point of the application as if the previous assignment was executed correctly.
 
-Every description of an assignment contains two parts with each a certain approach to executing the assignment: a **DIY** part and a **step-by-step** part. The DIY part just states the outcome you need to achieve with a link to the dapr documentation. The step-by-step part describes exactly what you need to change in the application step-by-step. It's up to you to pick an approach. If you pick the DIY approach and get stuck, you can always go to the step-by-step approach for some help.
+Every description of an assignment (accept the first one) contains two parts with each a certain approach to executing the assignment: a **DIY** part and a **step-by-step** part. The DIY part just states the outcome you need to achieve with a link to the dapr documentation. The step-by-step part describes exactly what you need to change in the application step-by-step. It's up to you to pick an approach. If you pick the DIY approach and get stuck, you can always go to the step-by-step approach for some help.
 
 Now it's time for you to get your hands dirty. Checkout the first assignment branch and get started. We assume you already cloned the [repository](https://github.com/edwinvw/dapr-hands-on). Open a git command-line and check-out the branch for the first assignment:
 
