@@ -82,4 +82,4 @@ Now it's time for you to get your hands dirty. Checkout the first assignment bra
 git checkout assignment01
 ```
 
-Now open the repository folder in VS Code. Have fun!
+Now open the repository folder in VS Code. Open the README.md in the folder with you favorite MarkDown reader and follow the instructions. Have fun!
