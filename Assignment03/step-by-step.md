@@ -2,6 +2,8 @@
 
 In this assignment, you're going to add dapr state management in the TrafficControl service to store vehicle information.
 
+> To get started with this assignment, open the `Assignment 3` folder in this repo in VS Code.
+
 ## Assignment goals
 
 In order to complete this assignment, the following goals must be met:
@@ -9,9 +11,81 @@ In order to complete this assignment, the following goals must be met:
 - The TrafficControl service saves the state of a vehicle (VehicleState class) using the state management building block after vehicle entry.
 - The TrafficControl service reads, updates and saves the state of a vehicle using the state management building block after vehicle exit.
 
-## Step 1
+For both these tasks you can use the dapr client for .NET.
 
-...
+## Step 1: Use dapr state-management building block
+
+1. Open the file `Assignment03/src/TrafficControlService/Controllers/TrafficController.cs` in VS Code.
+3. Add a private const field holding the name of the state-store:
+   ```csharp
+    private const string DAPR_STORE_NAME = "statestore";
+   ```
+4. Replace the call to the VehicleStateRepository to store the VehicleState in the `VehicleEntry` method with a call to the the dapr client:
+   ```csharp
+   await daprClient.SaveStateAsync<VehicleState>(DAPR_STORE_NAME, msg.LicenseNumber, vehicleState);
+   ```
+5. Add an argument to the `VehicleExit` method that is used to inject the dapr client:
+   ```csharp
+   public async Task<ActionResult> VehicleExit(VehicleRegistered msg, [FromServices] IHttpClientFactory httpClientFactory, [FromServices] DaprClient daprClient)
+
+   ```
+6. Replace the call to the VehicleStateRepository to retrieve the VehicleState in the `VehicleExit` method with a call to the the dapr client:
+   ```csharp
+    // get vehicle state
+    var state = await daprClient.GetStateEntryAsync<VehicleState>(DAPR_STORE_NAME, msg.LicenseNumber);
+   ```
+7. The state-data you receive from the dapr client is not an instance of the `VehicleState` class anymore, but a `StateEntry<VehicleState>`. To get to the actual `VehicleState`, you need to use the `Value` property of the `StateEntry`. So change all statements in the `VehicleExit` method where a property is read from the state instance and add `.Value` to the statement. Here is an example:
+   ```csharp
+   string licenseNumber = state.Value.LicenseNumber;
+   ```
+8. Replace the call to the VehicleStateRepository to save the updated VehicleState in the `VehicleExit` method with a call to the the dapr client:
+   ```csharp
+    // update state
+    state.Value.ExitTimestamp = msg.Timestamp;
+    await state.SaveAsync();
+   ```
+
+Now you're ready to test the application.
+
+1. Make sure no services from previous tests are running (close the command-shell windows).
+2. Open a new command-shell window and go to the `Assignment02/src/GovernmentService` folder in this repo.
+3. Start the Government service:
+   ```
+   dapr run --app-id governmentservice --app-port 6000 --dapr-grpc-port 50001 dotnet run
+   ```
+2. Open a new command-shell window and go to the `Assignment02/src/TrafficControlService` folder in this repo.
+3. Because the TrafficContol service is using the dapr state-management building block, you need to run this service with a dapr sidecar. The WebAPI is running on port 5000:
+   ```
+   dapr run --app-id trafficcontrolservice --app-port 5000 dotnet run
+   ```
+4. Open a new command-shell window and go to the `Assignment02/src/Simulation` folder in this repo.
+5. Start the Simulation:
+   ```
+   dotnet run
+   ```
+
+You should see the same logs as before. Obviously, the behavior of the application is exactly the same as before. But are the VehicleState entries actually stored in the default Reddis state-store? To check this, you will use the reddis CLI inside the `dapr_redis` container that is used as state-store in the default dapr installation:
+
+1. Open a new command-shell window.
+2. Execute the following command to start the redis-cli inside the running `dapr_redis` container:
+   ```
+   docker exec -it dapr_redis dapr-cli
+   ```
+3. In the redis-cli enter the following command to get the list of keys of items stored in the redis cache:
+   ```
+   keys *
+   ```
+   You should see a list of entries with keys in the form `"trafficcontrolservice||<license-number>"`.
+4. Enter the following command in the redis-cli to get the data stored with this key (change the license-number to one in the list you see):
+   ```
+   hgetall trafficcontrolservice||04-TP-59
+   ```
+5. You should see something similar to this:
+
+   ![](img/redis-cli.png)
+
+As you can see, the data is actually stored in the reddis cache. The cool thing about dapr is that multiple components exist that implement the state-management building-block. So without changing any code but only specifying a different dapr configuration, you could use an entirely different storage mechanism. If you're up for it, try to swap-out reddis with another state provider (see the [dapr-documentation on state management](https://github.com/dapr/docs/blob/master/concepts/state-management/README.md)).
+
 
 ## Next assignment
 

@@ -11,9 +11,11 @@ In order to complete this assignment, the following goals must be met:
 - The TrafficControl service saves the state of a vehicle (VehicleState class) using the state management building block after vehicle entry.
 - The TrafficControl service reads, updates and saves the state of a vehicle using the state management building block after vehicle exit.
 
+For both these tasks you can use the dapr client for .NET.
+
 ## DIY instructions
 
-Open the [dapr documentation](https://github.com/dapr/docs) and start hacking away. Make sure you use the default Reddis state-store provided out of the box by dapr.
+Open the [dapr documentation](https://github.com/dapr/docs) and start hacking away. Make sure you use the default Reddis state-store component provided out of the box by dapr.
 
 ## Step by step instructions
 
