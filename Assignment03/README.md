@@ -2,6 +2,8 @@
 
 In this assignment, you're going to add dapr state management in the TrafficControl service to store vehicle information.
 
+> To get started with this assignment, open the `Assignment 3` folder in this repo in VS Code.
+
 ## Assignment goals
 
 In order to complete this assignment, the following goals must be met:
@@ -19,4 +21,4 @@ To get step-by-step instructions to achieve the goals, open the [step-by-step de
 
 ## Next assignment
 
-To go to the next assignment, open the `Assignment04` folder in this repo VS Code. Open the README file in the folder with you favorite MarkDown reader and follow the instructions. Have fun!
+Go to [assignment 4](../Assignment04/README.md).

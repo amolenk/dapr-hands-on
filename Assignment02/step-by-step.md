@@ -126,4 +126,4 @@ You should see similar logging as before when you ran the application. So how ca
 
 ## Next assignment
 
-To go to the next assignment, open the `Assignment03` folder in this repo VS Code. Open the README file in the folder with you favorite MarkDown reader and follow the instructions. Have fun!
+Go to [assignment 3](../Assignment03/README.md).

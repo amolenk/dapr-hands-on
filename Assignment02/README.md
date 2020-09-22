@@ -2,6 +2,8 @@
 
 In this assignment, you're going to add dapr into the mix. You will use the Service-to-service Invocation building-block.
 
+> To get started with this assignment, open the `Assignment 2` folder in this repo in VS Code.
+
 ## Assignment goals
 
 In order to complete this assignment, the following goals must be met:
@@ -19,4 +21,4 @@ To get step-by-step instructions to achieve the goals, open the [step-by-step de
 
 ## Next assignment
 
-To go to the next assignment, open the `Assignment03` folder in this repo VS Code. Open the README file in the folder with you favorite MarkDown reader and follow the instructions. Have fun!
+Go to [assignment 3](../Assignment03/README.md).

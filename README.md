@@ -74,6 +74,12 @@ Make sure you have the following prerequisites installed on your machine:
 
 Every assignment is contained in a separate folder in this repo. Each folder contains the description of the assignment that you can follow. The folder also contains the starting-point of the application as if the previous assignment was executed correctly.
 
-Every description of an assignment (accept the first one) contains two parts with each a certain approach to executing the assignment: a **DIY** part and a **step-by-step** part. The DIY part just states the outcome you need to achieve with a link to the dapr documentation. The step-by-step part describes exactly what you need to change in the application step-by-step. It's up to you to pick an approach. If you pick the DIY approach and get stuck, you can always go to the step-by-step approach for some help.
+Every description of an assignment (accept the first one) contains two parts with each a certain approach to executing the assignment: a **DIY** part and a **step-by-step** part. The DIY part just states the outcome you need to achieve and no further instructions. It's entirely up to you to achieve the goals with the help of the dapr documentation. The step-by-step part describes exactly what you need to change in the application step-by-step. It's up to you to pick an approach. If you pick the DIY approach and get stuck, you can always go to the step-by-step approach for some help.
 
-Now it's time for you to get your hands dirty. Start with the first assignment branch and get started. We assume you already cloned the [repository](https://github.com/edwinvw/dapr-hands-on). Open the `Assignment01` folder in this repo VS Code. Open the README file in the folder with you favorite MarkDown reader and follow the instructions. Have fun!
+Now it's time for you to get your hands dirty and start with the first assignment started:
+
+1. Clone the Github repository with all the assignments to a local folder on your machine:
+   ```
+   git clone https://github.com/EdwinVW/dapr-hands-on.git
+   ```
+2. Go to [assignment 1](Assignment01/README.md).

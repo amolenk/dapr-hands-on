@@ -15,4 +15,4 @@ In order to complete this assignment, the following goals must be met:
 
 ## Next assignment
 
-To go to the next assignment, open the `Assignment04` folder in this repo VS Code. Open the README file in the folder with you favorite MarkDown reader and follow the instructions. Have fun!
+Go to [assignment 4](../Assignment04/README.md).
