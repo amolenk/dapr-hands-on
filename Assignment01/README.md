@@ -46,8 +46,4 @@ Now we know the application runs correctly. It's time to start adding dapr to th
 
 ## Next assignment
 
-To go to the next assignment, checkout the corresponding branch:
-
-```
-git checkout assignment02
-```
+To go to the next assignment, open the `Assignment02` folder in this repo VS Code. Open the README.md in the folder with you favorite MarkDown reader and follow the instructions. Have fun!

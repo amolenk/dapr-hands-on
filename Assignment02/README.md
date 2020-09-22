@@ -19,8 +19,4 @@ To get step-by-step instructions to achieve the goals, open the [step-by-step de
 
 ## Next assignment
 
-To go to the next assignment, checkout the corresponding branch:
-
-```
-git checkout assignment03
-```
+To go to the next assignment, open the `Assignment03` folder in this repo VS Code. Open the README file in the folder with you favorite MarkDown reader and follow the instructions. Have fun!
