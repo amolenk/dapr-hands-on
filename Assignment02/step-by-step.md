@@ -106,18 +106,18 @@ Now you're going to use the dapr client to make the call to the Government servi
 
 Now the dapr client is used to directly call a method on the Government service. Dapr will figure out where the service lives and handle the communication.
 
-In order to make sure the dapr client is injected into the VehicleEntry method, you need to register is in the Startup class:
+In order to make sure the dapr client is injected into the VehicleEntry method, you need to register it in the Startup class:
 
 10. Open the file `Assignment02/src/TrafficControlService/Startup.cs` in VS Code.
 
-11. Add a using statement in this file to make sure you can use the dapr client:
+11. Add using statements in this file to make sure you can use the dapr client and the System.Text.Json serializer:
 
    ```csharp
    using Dapr.Client;
    using System.Text.Json;
    ```
 
-12. Add code at the end of the `Configuration` method of the Startup class that registers the dapr client:
+12. Add code at the end of the `ConfigureServices` method of the Startup class that registers the dapr client:
 
    ```csharp
    services.AddDaprClient(builder => builder.UseJsonSerializationOptions(new JsonSerializerOptions()
