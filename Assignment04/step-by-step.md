@@ -1,4 +1,4 @@
-# dapr hands-on - Assignment 4 - Add pub/sub messsaging
+# dapr hands-on - Assignment 4 - Add pub/sub messaging
 
 ## Assignment goals
 
@@ -71,7 +71,7 @@ This is the receiving part done. Now you need to update the simulation so that i
    ```csharp
    var daprClient = new DaprClientBuilder().Build();
    ```
-6. Relace the serialization of the `VehicleRegistered` event and the sending of the data using the HttpClient:
+6. Replace the serialization of the `VehicleRegistered` event and the sending of the data using the HttpClient:
    ```csharp
    var @eventJson = new StringContent(JsonSerializer.Serialize(@event, _jsonSerializerOptions), Encoding.UTF8, "application/json");
    httpClient.PostAsync("http://localhost:5000/trafficcontrol/entrycam", @eventJson).Wait();
@@ -98,7 +98,7 @@ Now you're ready to test the application.
    dapr run --app-id governmentservice --app-port 6000 --dapr-grpc-port 50001 dotnet run
    ```
 2. Open a new command-shell window and go to the `Assignment04/src/TrafficControlService` folder in this repo.
-3. Start the TrafficContol service with a dapr sidecar. The WebAPI is running on port 5000:
+3. Start the TrafficControl service with a dapr sidecar. The WebAPI is running on port 5000:
    ```
    dapr run --app-id trafficcontrolservice --app-port 5000 dotnet run
    ```
@@ -114,13 +114,13 @@ You should see the same logs as before. Obviously, the behavior of the applicati
 == DAPR == time="2020-09-23T08:05:34.2950896+02:00" level=info msg="app is subscribed to the following topics: [trafficcontrol.entrycam trafficcontrol.exitcam] through pubsub=pubsub" app_id=trafficcontrolservice ...
 ```
 
-So you can see that dapr has asked the service which topics it subscribes on and ceated the subscriptions.
+So you can see that dapr has asked the service which topics it subscribes on and created the subscriptions.
 
 You can also check whether messages are actually sent through the Redis cache using the redis-cli in the redis container.
 
 1. First stop the TrafficControl service (press Ctrl-C in the command-shell window in runs in). The Simulation will keep sending messages via pub/sub that are not consumed by anyone.
 2. Wait until several vehicles are simulated.
-3. Stop the Simulation (Ctlr-C in the command-shell window it runs in).
+3. Stop the Simulation (Ctrl-C in the command-shell window it runs in).
 4. Now restart the TrafficControl service:
    ```
    dapr run --app-id trafficcontrolservice --app-port 5000 dotnet run

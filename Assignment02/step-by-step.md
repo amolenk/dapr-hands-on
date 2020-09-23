@@ -120,7 +120,7 @@ Now you're going to start the TrafficControl service. This service does not need
 The services are up & running. Now you're going to test this using the simulation.
 
 18. Open a command-shell window and go to the `Assignment02/src/Simulation` folder in this repo.
-19. Start the simulaton:
+19. Start the simulation:
    ```
    dotnet run
    ```

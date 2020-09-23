@@ -44,7 +44,7 @@ namespace Simulation
                             Timestamp = entryTimestamp
                         };
 
-                        daprClient.PublishEventAsync(("pubsub", "trafficcontrol.entrycam", @event).Wait();
+                        daprClient.PublishEventAsync("pubsub", "trafficcontrol.entrycam", @event).Wait();
 
                         Console.WriteLine($"Simulated ENTRY of vehicle with license-number {@event.LicenseNumber} in lane {@event.Lane}");
 
