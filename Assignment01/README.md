@@ -24,11 +24,17 @@ Now you can test whether you can call the Government service's Web-API. You can 
 ### Step 2. Run the TrafficControl service
 
 1. Make sure the Government service is running (see step 1).
+
 2. Open a new command-shell window.
+
 3. Go to the folder `Assignment01/src/TrafficControlService`.
+
 4. Start the service using `dotnet run`.
+
 5. Open the `test.http` file in the folder in VS Code.
+
 6. Click on `Execute request` in the file to send a request to the API.
+
 4. Check the logging in both the command-shell windows. The logging should look like this:
    TrafficControl service:
 
@@ -42,9 +48,13 @@ Now you can test whether you can call the Government service's Web-API. You can 
 You've tested the APIs directly by using a REST client. Now you're going to run the simulation that actually simulates cars driving on the highway. The simulation will simulate 3 entry- and exit-cameras (one for each lane).
 
 1. Make sure both the TrafficControl service and the Government service are running (see step 1 and 2).
+
 2. Open a new command-shell window.
+
 3. Go to the folder `Assignment01/src/Simulation`.
+
 4. Start the service using `dotnet run`.
+
 5. Check the logging in all three command-shell windows. You should see similar output as before for the Government service and TrafficControl service. In the simulation window you should see something like this:
 
    ![](img/logging-simulation.png)
