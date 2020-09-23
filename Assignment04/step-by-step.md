@@ -178,7 +178,7 @@ So you can see that dapr has asked the service which topics it subscribes on and
    dapr run --app-id trafficcontrolservice --app-port 5000 --dapr-grpc-port 50001 dotnet run
    ```
 
-Now you should see that - although the simulation is not running - messages are coming into the TrafficControl service. This is one of the great advantages of using pub/sub messaging. The producer and consumer are decoupled from each-other and don't have to be online at the same time in order to work together.
+Now you should see in the logging that - although the simulation is not running - messages are coming into the TrafficControl service. This is one of the great advantages of using pub/sub messaging. The producer and consumer are decoupled from each-other and don't have to be online at the same time in order to work together.
 
 ## Step 6: Publish messages from the TrafficControl service to the Government service
 
