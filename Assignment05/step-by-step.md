@@ -116,19 +116,109 @@ Each one of these components is configured using a yaml file in a well known loc
 
    This file holds the secrets you want to use in your application. Now we need a secret-store component that uses this file so we can read the secrets using the dapr client.
 
-6. Create a new file in the components folder named `zipkin.yaml` and paste this snippet into the file:
+6. Create a new file in the components folder named `secrets-file.yaml` and paste this snippet into the file:
 
    ```yaml
     apiVersion: dapr.io/v1alpha1
     kind: Component
     metadata:
-    name: zipkin
+    name: local-secret-store
+    namespace: default
     spec:
-    type: exporters.zipkin
+    type: secretstores.local.localsecretstore
     metadata:
-    - name: enabled
-        value: "true"
-    - name: exporterAddress
-        value: http://localhost:9411/api/v2/spans
+    - name: secretsFile
+        value: components/secrets.json
    ```
-[WIP]
+
+   This config file configures the file-based local secret-store. You have to specify the file containing the secrets in the metadata. Important to notice here, is that the file should be specified relative to the folder where the application is started (in this case the `Assignment05/src/TrafficControl` folder).
+
+Now you're ready to add code to the TrafficControl service to read the API key from the secrets-store and pass it in the service-to-service invocation call to the Government service.
+
+## Step 3: Use the secret-store from the TrafficControl service
+
+1. Open the file `Assignment04/src/TrafficControlService/Controllers/TrafficController.cs` in VS Code.
+
+2. Change the code for retrieving vehicle information at the beginning of the `VehicleEntry` method:
+
+   ```csharp
+    // get vehicle details
+    var apiKeySecret = await daprClient.GetSecretAsync("local-secret-store", "rdw-api-key");
+    var apiKey = apiKeySecret["rdw-api-key"];
+    var vehicleInfo = await daprClient.InvokeMethodAsync<VehicleInfo>(
+        "governmentservice",
+        $"rdw/{apiKey}/vehicle/{msg.LicenseNumber}",
+        new HTTPExtension { Verb = HTTPVerb.Get });
+   ```
+
+   As you can see, you first use the dapr client to get the secret with key `rdw-api-key` from the local secret-store. This returns a dictionary of values. Then you get the API key from the dictionary and pass it in the service-to-service invocation.
+
+## Step 4: Test the application
+
+1. Make sure no services from previous tests are running (close the command-shell windows).
+
+2. Open a new command-shell window and go to the `Assignment05/src/GovernmentService` folder in this repo.
+
+3. Start the Government service:
+
+   ```
+   dapr run --app-id governmentservice --app-port 6000 --dapr-grpc-port 50001 dotnet run
+   ```
+
+2. Open a new command-shell window and go to the `Assignment05/src/TrafficControlService` folder in this repo.
+
+3. Start the TrafficControl service with a dapr sidecar. The WebAPI is running on port 5000. Because the TrafficControl service needs to use the secret-store component, you have to specify the custom components folder you created earlier on the command-line:
+
+   ```
+   dapr run --app-id trafficcontrolservice --app-port 5000 --components-path ./components dotnet run
+   ```
+
+   If you examine the dapr logging, you should see a line in there similar to this:
+
+   ```
+   == DAPR == time="2020-09-23T12:08:50.7645912+02:00" level=info msg="found component local-secret-store (secretstores.local.localsecretstore)" app_id=trafficcontrolservice ...
+   ```
+
+4. Open a new command-shell window and go to the `Assignment05/src/Simulation` folder in this repo.
+
+5. Start the Simulation:
+
+   ```
+   dotnet run
+   ```
+
+You should see the same logs as before.
+
+## Step 5: Validate secret-store operation
+
+To test whether the secret-store actually works, you will change the secret in the secret-store.
+
+1. Stop the Simulation (press Ctrl-C in the command-shell window in runs in).
+
+2. Stop the TrafficControl service (press Ctrl-C in the command-shell window in runs in).
+
+3. Change the value of the `rdw-api-key` secret in the `secrets.json` file in the components folder to some random string.
+
+4. Start the TrafficControl service with a dapr sidecar.
+
+   ```
+   dapr run --app-id trafficcontrolservice --app-port 5000 --components-path ./components dotnet run
+   ```
+
+5. Start the Simulation:
+
+   ```
+   dotnet run
+   ```
+
+Now you should see some errors in the logging because the TrafficControl service is no longer passing the correct API key:
+
+   ```
+    == APP ==       An unhandled exception has occurred while executing the request.
+
+    == APP == Grpc.Core.RpcException: Status(StatusCode=Unauthenticated, Detail="Unauthorized")
+   ```
+
+Don't forget change the API key in the secrets file back to the correct API key.
+
+
