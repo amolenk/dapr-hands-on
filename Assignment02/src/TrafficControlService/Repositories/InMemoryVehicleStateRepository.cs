@@ -5,6 +5,7 @@ namespace TrafficControlService.Repositories
 {
     public class InMemoryVehicleStateRepository : IVehicleStateRepository
     {
+        private readonly object _lock = new object();
         private Dictionary<string, VehicleState> _data = new Dictionary<string, VehicleState>();
 
         public VehicleState GetVehicleState(string licenseNumber)
@@ -18,13 +19,16 @@ namespace TrafficControlService.Repositories
 
         public void StoreVehicleState(VehicleState state)
         {
-            if (_data.ContainsKey(state.LicenseNumber))
+            lock (_lock)
             {
-                _data[state.LicenseNumber] = state;
-            }
-            else
-            {
-                _data.Add(state.LicenseNumber, state);
+                if (_data.ContainsKey(state.LicenseNumber))
+                {
+                    _data[state.LicenseNumber] = state;
+                }
+                else
+                {
+                    _data.Add(state.LicenseNumber, state);
+                }
             }
         }
     }
