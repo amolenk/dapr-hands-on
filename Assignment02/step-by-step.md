@@ -61,13 +61,13 @@ First you're going to add a reference to the dapr libraries for .NET:
 3. Add a reference to the dapr client for .NET version 0.10.0-preview01:
 
    ```
-   dotnet add package Dapr.Client 0.10.0-preview01
+   dotnet add package Dapr.Client -v 0.10.0-preview01
    ```
 
 4. Add a reference to the dapr ASP.NET Core integration library version 0.10.0-preview01:
 
    ```
-   dotnet add package Dapr.AspNetCore 0.10.0-preview01
+   dotnet add package Dapr.AspNetCore -v 0.10.0-preview01
    ```
 
 5. Restore all references:

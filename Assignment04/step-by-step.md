@@ -80,7 +80,7 @@ This is the receiving part done. Now you need to update the simulation so that i
 3. Add a reference to the dapr client for .NET version 0.10.0-preview01:
 
    ```
-   dotnet add package Dapr.Client 0.10.0-preview01
+   dotnet add package Dapr.Client -v 0.10.0-preview01
    ```
 
 4. Restore all references:
