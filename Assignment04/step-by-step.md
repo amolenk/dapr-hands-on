@@ -55,7 +55,7 @@ Now you need to make sure that dapr knows this controller and also knows which p
 
 This is the receiving part done. Now you need to update the simulation so that it uses dapr pub/sub to send messages to the TrafficControl service.
 
-## Step 3: Publish messages from the Simulation
+## Step 3: Publish messages from the Simulation to the TrafficControl service
 
 1. Open the file `Assignment04/src/Simulation/Simulation.csproj` in VS Code.
 2. Remove the reference to `System.Net.Http` and replace it with a reference to 'Dapr.Client':
@@ -126,6 +126,14 @@ You can also check whether messages are actually sent through the Redis cache us
    dapr run --app-id trafficcontrolservice --app-port 5000 dotnet run
    ```
 5. Now you should see that - although the simulation is not running - messages are coming into the TrafficControl service. This is one of the great advantages of using pub/sub messaging. The producer and consumer are decoupled from each-other and don't have to be online at the same time in order to work together.
+
+## Step 5: Publish messages from the TrafficControl service to the Government service
+
+This is an optional step for which I will leave it up to you to change the application so that the `HandleSpeedingViolation` on the `CJIBController` on the Government service can be called using pub/sub and the TrafficControl service uses pub/sub to send speeding violations to this endpoint.
+
+Basically you can follow the same steps as you did earlier in this assignment but now for the Government service. Use `cjib.speedingviolation` as topic name.
+
+For this step, I'll leave more to
 
 ## Next assignment
 

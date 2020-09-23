@@ -97,9 +97,7 @@ namespace TrafficControlService.Controllers
                     Timestamp = msg.Timestamp
                 };
 
-                var @eventJson = new StringContent(JsonSerializer.Serialize(@event, _jsonSerializerOptions), Encoding.UTF8, "application/json");
-                var httpClient = httpClientFactory.CreateClient();
-                var response = await httpClient.PostAsync("http://localhost:6000/cjib/speedingviolation", @eventJson);
+                await daprClient.PublishEventAsync<SpeedingViolationDetected>("pubsub", "cjib.speedingviolation", @event);
             }
 
             return Ok();

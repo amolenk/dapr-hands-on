@@ -1,4 +1,5 @@
-﻿using GovernmentService.Events;
+﻿using Dapr;
+using GovernmentService.Events;
 using GovernmentService.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -17,6 +18,7 @@ namespace GovernmentService.Controllers
             _fineCalculator = fineCalculator;
         }
 
+        [Topic("pubsub", "cjib.speedingviolation")]
         [Route("cjib/speedingviolation")]
         [HttpPost()]
         public ActionResult HandleSpeedingViolation(SpeedingViolationDetected @event)

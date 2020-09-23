@@ -1,3 +1,4 @@
+using System.Text.Json;
 using GovernmentService.Helpers;
 using GovernmentService.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -24,7 +25,13 @@ namespace GovernmentService
 
             services.AddSingleton<IFineCalculator, HardCodedFineCalculator>();
 
-            services.AddControllers();
+            services.AddControllers().AddDapr();
+
+            services.AddDaprClient(builder => builder.UseJsonSerializationOptions(new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                PropertyNameCaseInsensitive = true
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,10 +44,13 @@ namespace GovernmentService
 
             app.UseRouting();
 
+            app.UseCloudEvents();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapSubscribeHandler();
                 endpoints.MapControllers();
             });
         }
