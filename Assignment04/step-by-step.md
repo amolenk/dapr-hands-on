@@ -97,10 +97,12 @@ This is the receiving part done. Now you need to update the simulation so that i
    using Dapr.Client;
    ```
 
-7. Replace the creation of an `HttpClient` in the `Start` method with the creation of a dapr client:
+7. Replace the creation of an `HttpClient` in the `Start` method with the creation of a dapr client. Later in this assignment, you will start the Simulation with its own dapr side-car. You need to specify the gRPC port that will be used for communicating with the side-car (`50003`):
 
    ```csharp
-   var daprClient = new DaprClientBuilder().Build();
+   var daprClient = new DaprClientBuilder()
+      .UseEndpoint("http://localhost:50003")
+      .Build();
    ```
 
 8. Replace the serialization of the `VehicleRegistered` event and the sending of the data using the HttpClient:
@@ -148,10 +150,10 @@ Now you're ready to test the application.
 
 4. Open a new command-shell window and go to the `Assignment04/src/Simulation` folder in this repo.
 
-5. Start the Simulation:
+5. Start the Simulation. You will now start the Simulation with its own side-car and use gRPC port `50003` (as specified in the code):
 
    ```
-   dotnet run
+   dapr run --app-id simulation --dapr-grpc-port 50003 dotnet run
    ```
 
 You should see the same logs as before. Obviously, the behavior of the application is exactly the same as before. But if you look closely at the dapr logs of the TrafficControl service, you should see something like this in there:
