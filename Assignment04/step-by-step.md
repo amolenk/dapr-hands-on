@@ -162,9 +162,9 @@ You should see the same logs as before. Obviously, the behavior of the applicati
 == DAPR == time="2020-09-23T08:05:34.2950896+02:00" level=info msg="app is subscribed to the following topics: [trafficcontrol.entrycam trafficcontrol.exitcam] through pubsub=pubsub" app_id=trafficcontrolservice ...
 ```
 
-So you can see that dapr has asked the service which topics it subscribes on and created the subscriptions.
+So you can see that dapr has asked the service which topics it subscribes on and created the subscriptions. You can also check whether messages are actually sent through the Redis cache.
 
-You can also check whether messages are actually sent through the Redis cache using the redis-cli in the redis container.
+## Step 5: Validate use of the Redis cache as message-queue
 
 1. First stop the TrafficControl service (press Ctrl-C in the command-shell window in runs in). The Simulation will keep sending messages via pub/sub that are not consumed by anyone.
 
