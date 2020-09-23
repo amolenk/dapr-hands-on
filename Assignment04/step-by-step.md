@@ -172,8 +172,6 @@ This is an optional step for which I will leave it up to you to change the appli
 
 Basically you can follow the same steps as you did earlier in this assignment but now for the Government service. Use `cjib.speedingviolation` as topic name.
 
-For this step, I'll leave more to
-
 ## Next assignment
 
 Go to [assignment 5](../Assignment05/README.md).
