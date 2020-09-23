@@ -1,6 +1,8 @@
 # dapr hands-on - Assignment 3 - Add dapr state management
 
-In this assignment, you're going to add dapr state management in the TrafficControl service to store vehicle information.
+In this assignment, you're going to add dapr **state management** in the TrafficControl service to store vehicle information.
+
+Before you start with this assignment, read the [introduction to this building-block](https://github.com/dapr/docs/blob/master/concepts/state-management/README.md) in the dapr documentation.
 
 ## Assignment goals
 
