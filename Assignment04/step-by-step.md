@@ -164,7 +164,7 @@ You can also check whether messages are actually sent through the Redis cache us
    dapr run --app-id trafficcontrolservice --app-port 5000 dotnet run
    ```
 
-5. Now you should see that - although the simulation is not running - messages are coming into the TrafficControl service. This is one of the great advantages of using pub/sub messaging. The producer and consumer are decoupled from each-other and don't have to be online at the same time in order to work together.
+Now you should see that - although the simulation is not running - messages are coming into the TrafficControl service. This is one of the great advantages of using pub/sub messaging. The producer and consumer are decoupled from each-other and don't have to be online at the same time in order to work together.
 
 ## Step 5: Publish messages from the TrafficControl service to the Government service
 
