@@ -15,7 +15,7 @@ If you haven't installed dapr stand-alone yet on your machine, first do that. If
 
 1. Make sure you have docker for desktop running on your machine.
 
-2. Open a command-shell window.
+2. Open a new command-shell window.
 
 3. enter the following command:
 
@@ -32,11 +32,11 @@ You started the government service in assignment 01 using `dotnet run`. When you
 - The service needs a unique id which dapr can use to find it. You will use `governmentservice` as the id.
 - The HTTP port the API is listening on is 6000. So you need to tell dapr that (so it can handle the communication).
 - Dapr uses gRPC to communicate with the dapr side-car. The port used for this communication is `50001` by default. But this port will be used by the TrafficControl service later, so we need to specify a different port for the Government service to prevent a port clash on the local machine. We will use port `50002`.
-- Finally you need to tell dapr how to start the service. This is again `dotnet run`.
+- Finally you need to tell dapr how to start the service. This is simply `dotnet run`.
 
 You will use the `run` command of the dapr CLI and specify all the options above on the command-line:
 
-1. Open a command-shell window and go to the `Assignment02/src/GovernmentService` folder in this repo.
+1. Open a new command-shell window and go to the `Assignment02/src/GovernmentService` folder in this repo.
 
 2. enter the following command to run the service with a dapr sidecar:
 
@@ -56,7 +56,7 @@ First you're going to add a reference to the dapr libraries for .NET:
 
 1. Open the `Assignment 2` folder in this repo in VS Code.
 
-2. Open a command-shell window and go to the `Assignment02/src/TrafficControlService` folder in this repo.
+2. Open a new command-shell window and go to the `Assignment02/src/TrafficControlService` folder in this repo.
 
 3. Add a reference to the dapr client for .NET version 0.10.0-preview01:
 
@@ -133,9 +133,9 @@ In order to make sure the dapr client is injected into the VehicleEntry method, 
 
 Now you're going to start the TrafficControl service. This service does not need to run with a dapr sidecar because it uses the dapr client directly. Later you're going to add a side-car to this service.
 
-1. Make sure the Government service is running with the dapr side-car (as you did in step 1.2).
+1. Make sure the Government service is (still) running with the dapr side-car (as you did in step 1.2).
 
-2. Open a command-shell window and go to the `Assignment02/src/TrafficControlService` folder in this repo.
+2. Open a new command-shell window and go to the `Assignment02/src/TrafficControlService` folder in this repo.
 
 3. Check all your code-changes are correct by building the code:
 
@@ -153,7 +153,7 @@ Now you're going to start the TrafficControl service. This service does not need
 
 The services are up & running. Now you're going to test this using the simulation.
 
-5. Open a command-shell window and go to the `Assignment02/src/Simulation` folder in this repo.
+5. Open a new command-shell window and go to the `Assignment02/src/Simulation` folder in this repo.
 
 6. Start the simulation:
 
