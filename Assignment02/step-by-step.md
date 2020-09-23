@@ -41,7 +41,7 @@ You will use the `run` command of the dapr CLI and specify all the options above
 
 That's it, you're now running the Government service with a dapr side-car. This means other services can use dapr to call this service. This is what you'll do in the next step.
 
-### Step 2: Call the government service using service-to-service invocation
+## Step 2: Call the government service using service-to-service invocation
 
 In this step, you're going to change the code of the TrafficControl service so it uses the dapr client for .NET to call the government service.
 
