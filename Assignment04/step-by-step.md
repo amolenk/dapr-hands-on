@@ -168,7 +168,7 @@ Now you should see that - although the simulation is not running - messages are 
 
 ## Step 5: Publish messages from the TrafficControl service to the Government service
 
-This is an optional step for which I will leave it up to you to change the application so that the `HandleSpeedingViolation` on the `CJIBController` on the Government service can be called using pub/sub and the TrafficControl service uses pub/sub to send speeding violations to this endpoint.
+This is an optional step for which I will leave it up to you to change the application so that the `HandleSpeedingViolation` on the `CJIBController` of the Government service can be called using pub/sub and the TrafficControl service uses pub/sub to send speeding violations to this endpoint.
 
 Basically you can follow the same steps as you did earlier in this assignment but now for the Government service. Use `cjib.speedingviolation` as topic name.
 
