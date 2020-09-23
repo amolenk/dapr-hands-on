@@ -23,7 +23,9 @@ namespace Simulation
 
             // initialize state
             _rnd = new Random();
-            var daprClient = new DaprClientBuilder().Build();
+            var daprClient = new DaprClientBuilder()
+                .UseEndpoint("http://localhost:50003")
+                .Build();
 
             while (true)
             {

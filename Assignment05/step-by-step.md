@@ -184,7 +184,7 @@ Now you're ready to add code to the TrafficControl service to read the API key f
 5. Start the Simulation:
 
    ```
-   dotnet run
+   dapr run --app-id simulation --dapr-grpc-port 50003 dotnet run
    ```
 
 You should see the same logs as before.
