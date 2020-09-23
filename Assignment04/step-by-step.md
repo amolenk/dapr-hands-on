@@ -17,7 +17,7 @@ With the dapr pub/sub building-block, you use a *topic* to send and receive mess
 
 1. Open the file `Assignment04/src/TrafficControlService/Controllers/TrafficController.cs` in VS Code.
 
-2. Add a using statement the file so you can use dapr classes:
+2. Add a using statement int this file so you can use dapr classes:
 
    ```csharp
     using Dapr;
@@ -43,7 +43,7 @@ Now you need to make sure that dapr knows this controller and also knows which p
 
 1. Open the file `Assignment04/src/TrafficControlService/Startup.cs` in VS Code.
 
-2. Change the `AddControllers` line in the `ConfigureServices` method to:
+2. Change the `AddControllers` line in the `ConfigureServices` method in this file to:
 
    ```csharp
    services.AddControllers().AddDapr();
@@ -69,29 +69,41 @@ This is the receiving part done. Now you need to update the simulation so that i
 
 ## Step 3: Publish messages from the Simulation to the TrafficControl service
 
-1. Open the file `Assignment04/src/Simulation/Simulation.csproj` in VS Code.
+1. Open a command-shell window and go to the `Assignment04/src/Simulation` folder in this repo.
 
-2. Remove the reference to `System.Net.Http` and replace it with a reference to 'Dapr.Client':
+2. Remove the reference to `System.Net.Http`:
 
-   ```xml
-   <PackageReference Include="Dapr.Client" Version="0.10.0-preview01" />
+   ```
+   dotnet remove package System.Net.Http
    ```
 
-3. Open the file `Assignment04/src/Simulation/CameraSimulation.csproj` in VS Code.
+3. Add a reference to the dapr client for .NET version 0.10.0-preview01:
 
-4. Remove the using statement for `System.Net.Http` and add one for using the dapr client:
+   ```
+   dotnet add package Dapr.Client 0.10.0-preview01
+   ```
+
+4. Restore all references:
+
+   ```
+   dotnet restore
+   ```
+
+5. Open the file `Assignment04/src/Simulation/CameraSimulation.cs` in VS Code.
+
+6. In this file, remove the using statement for `System.Net.Http` and add one for using the dapr client:
 
    ```csharp
    using Dapr.Client;
    ```
 
-5. Replace the creation of an `HttpClient` in the `Start` method with the creation of a dapr client:
+7. Replace the creation of an `HttpClient` in the `Start` method with the creation of a dapr client:
 
    ```csharp
    var daprClient = new DaprClientBuilder().Build();
    ```
 
-6. Replace the serialization of the `VehicleRegistered` event and the sending of the data using the HttpClient:
+8. Replace the serialization of the `VehicleRegistered` event and the sending of the data using the HttpClient:
 
    ```csharp
    var @eventJson = new StringContent(JsonSerializer.Serialize(@event, _jsonSerializerOptions), Encoding.UTF8, "application/json");
@@ -106,7 +118,7 @@ This is the receiving part done. Now you need to update the simulation so that i
 
    As you can see, this uses the same topic-name (*trafficcontrol.entrycam*) as we used in the TrafficControl service. The "pubsub" argument passed into the `PublishEventAsync` method is the name of the pub/sub component to use. By default dapr uses the Redis cache installed with dapr as message broker.
 
-7. Also replace the Http client code with the dapr client for the exit event:
+9. Also replace the Http client code with the dapr client for the exit event:
 
    ```csharp
    daprClient.PublishEventAsync("pubsub", "trafficcontrol.exitcam", @event).Wait();

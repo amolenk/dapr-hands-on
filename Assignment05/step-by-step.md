@@ -15,7 +15,7 @@ First you going to change the `GetVehicleDetails` method of the `RDWController` 
 
 2. Open the file `Assignment05/src/GovernmentService/Controllers/RDWController.cs` in VS Code.
 
-3. Add a private constant field to the class to hold the API key:
+3. Add a private constant field in this file to hold the API key:
 
    ```csharp
    private const string SUPER_SECRET_API_KEY = "A6k9D42L061Fx4Rm2K8";
@@ -139,7 +139,7 @@ Now you're ready to add code to the TrafficControl service to read the API key f
 
 1. Open the file `Assignment04/src/TrafficControlService/Controllers/TrafficController.cs` in VS Code.
 
-2. Change the code for retrieving vehicle information at the beginning of the `VehicleEntry` method:
+2. Change the code for retrieving vehicle information at the beginning of the `VehicleEntry` method in this file:
 
    ```csharp
     // get vehicle details

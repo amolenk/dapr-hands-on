@@ -15,7 +15,7 @@ For both these tasks you can use the dapr client for .NET.
 
 2. Open the file `Assignment03/src/TrafficControlService/Controllers/TrafficController.cs` in VS Code.
 
-3. Add a private const field holding the name of the state-store:
+3. Add a private const field in this file holding the name of the state-store:
 
    ```csharp
     private const string DAPR_STORE_NAME = "statestore";

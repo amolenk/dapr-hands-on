@@ -52,30 +52,35 @@ That's it, you're now running the Government service with a dapr side-car. This 
 
 In this step, you're going to change the code of the TrafficControl service so it uses the dapr client for .NET to call the government service.
 
-First you're going to add a reference to the dapr SDK for .NET:
+First you're going to add a reference to the dapr libraries for .NET:
 
 1. Open the `Assignment 2` folder in this repo in VS Code.
 
-2. Open the file `Assignment02/TrafficControlService/TrafficControlService.csproj` in VS Code.
+2. Open a command-shell window and go to the `Assignment02/src/TrafficControlService` folder in this repo.
 
-3. Add a reference to the dapr SDK for .NET and the dapr ASP.NET Core integration version 0.10.0-preview01 by adding the following section to the file:
+3. Add a reference to the dapr client for .NET version 0.10.0-preview01:
 
-   ```xml
-   <ItemGroup>
-      <PackageReference Include="Dapr.Client" Version="0.10.0-preview01" />
-      <PackageReference Include="Dapr.AspNetCore" Version="0.10.0-preview01" />
-   </ItemGroup>
+   ```
+   dotnet add package Dapr.Client 0.10.0-preview01
    ```
 
-4. Open a command-shell window and go to the `Assignment02/src/TrafficControlService` folder in this repo.
+4. Add a reference to the dapr ASP.NET Core integration library version 0.10.0-preview01:
 
-5. Restore all references by executing `dotnet restore`.
+   ```
+   dotnet add package Dapr.AspNetCore 0.10.0-preview01
+   ```
+
+5. Restore all references:
+
+   ```
+   dotnet restore
+   ```
 
 Now you're going to use the dapr client to make the call to the Government service:
 
 6. Open the file `Assignment02/src/TrafficControlService/Controllers/TrafficController.cs` in VS Code.
 
-7. Add a using statements in the file to make sure you can use the dapr client:
+7. Add a using statements in this file to make sure you can use the dapr client:
 
    ```csharp
    using Dapr.Client;
@@ -105,7 +110,7 @@ In order to make sure the dapr client is injected into the VehicleEntry method, 
 
 10. Open the file `Assignment02/src/TrafficControlService/Startup.cs` in VS Code.
 
-11. Add a using statement in the file to make sure you can use the dapr client:
+11. Add a using statement in this file to make sure you can use the dapr client:
 
    ```csharp
    using Dapr.Client;
@@ -128,19 +133,19 @@ In order to make sure the dapr client is injected into the VehicleEntry method, 
 
 Now you're going to start the TrafficControl service. This service does not need to run with a dapr sidecar because it uses the dapr client directly. Later you're going to add a side-car to this service.
 
-13. Make sure the Government service is running with the dapr side-car (as you did in step 1.2).
+1. Make sure the Government service is running with the dapr side-car (as you did in step 1.2).
 
-14. Open a command-shell window and go to the `Assignment02/src/TrafficControlService` folder in this repo.
+2. Open a command-shell window and go to the `Assignment02/src/TrafficControlService` folder in this repo.
 
-15. Check all your code-changes are correct by building the code:
+3. Check all your code-changes are correct by building the code:
 
    ```
    dotnet build
    ```
 
-16. If you see any warnings or errors, review the previous steps to make sure the code is correct.
+4. If you see any warnings or errors, review the previous steps to make sure the code is correct.
 
-17. Start the TrafficControl service:
+5. Start the TrafficControl service:
 
    ```
    dotnet run
@@ -148,9 +153,9 @@ Now you're going to start the TrafficControl service. This service does not need
 
 The services are up & running. Now you're going to test this using the simulation.
 
-18. Open a command-shell window and go to the `Assignment02/src/Simulation` folder in this repo.
+6. Open a command-shell window and go to the `Assignment02/src/Simulation` folder in this repo.
 
-19. Start the simulation:
+7. Start the simulation:
 
    ```
    dotnet run
