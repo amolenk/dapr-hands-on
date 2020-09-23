@@ -17,7 +17,7 @@ First open the `Assignment 2` folder in this repo in VS Code. Then open the [dap
 
 ## Step by step instructions
 
-To get step-by-step instructions to achieve the goals, open the [step-by-step description](step-by-step.md).
+To get step-by-step instructions to achieve the goals, open the [step-by-step instructions](step-by-step.md).
 
 ## Next assignment
 
