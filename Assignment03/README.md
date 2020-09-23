@@ -15,7 +15,7 @@ For both these tasks you can use the dapr client for .NET.
 
 ## DIY instructions
 
-First open the `Assignment 3` folder in this repo in VS Code. Then open the [dapr documentation](https://github.com/dapr/docs) and start hacking away. Make sure you use the default Reddis state-store component provided out of the box by dapr.
+First open the `Assignment 3` folder in this repo in VS Code. Then open the [dapr documentation](https://github.com/dapr/docs) and start hacking away. Make sure you use the default Redis state-store component provided out of the box by dapr.
 
 ## Step by step instructions
 

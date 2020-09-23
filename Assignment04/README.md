@@ -8,11 +8,12 @@ Before you start with this assignment, read the [introduction to this building-b
 
 In order to complete this assignment, the following goals must be met:
 
-[WIP]
+1. The simulation uses the dapr client to send messages over pub/sub to the TrafficControl service (vehicle entry and vehicle exit).
+2. The TrafficControl service uses the dapr client to send messages to the Government service (for communicating speeding violations to the CJIB).
 
 ## DIY instructions
 
-First open the `Assignment 4` folder in this repo in VS Code. Then open the [dapr documentation](https://github.com/dapr/docs) and start hacking away. Make sure you use the default Reddis pub/sub component provided out of the box by dapr.
+First open the `Assignment 4` folder in this repo in VS Code. Then open the [dapr documentation](https://github.com/dapr/docs) and start hacking away. Make sure you use the default Redis pub/sub component provided out of the box by dapr.
 
 ## Step by step instructions
 

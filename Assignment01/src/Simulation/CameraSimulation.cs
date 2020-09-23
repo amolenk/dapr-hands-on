@@ -55,8 +55,10 @@ namespace Simulation
                         Task.Delay(exitDelay).Wait();
                         @event.Timestamp = DateTime.Now;
                         @event.Lane = _rnd.Next(1, 4);
+
                         @eventJson = new StringContent(JsonSerializer.Serialize(@event, _jsonSerializerOptions), Encoding.UTF8, "application/json");
                         httpClient.PostAsync("http://localhost:5000/trafficcontrol/exitcam", @eventJson).Wait();
+
                         Console.WriteLine($"Simulated EXIT of vehicle with license-number {@event.LicenseNumber} in lane {@event.Lane}");
                     });
                 }

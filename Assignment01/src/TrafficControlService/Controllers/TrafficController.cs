@@ -21,7 +21,8 @@ namespace TrafficControlService.Controllers
         private readonly string _roadId;
         private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
         {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            PropertyNameCaseInsensitive = true
         };
 
         public TrafficController(
@@ -42,7 +43,7 @@ namespace TrafficControlService.Controllers
             var httpClient = httpClientFactory.CreateClient();
             var response = await httpClient.GetAsync($"http://localhost:6000/rdw/vehicle/{msg.LicenseNumber}");
             using var responseStream = await response.Content.ReadAsStreamAsync();
-            var vehicleInfo = await JsonSerializer.DeserializeAsync<VehicleInfo>(responseStream);
+            var vehicleInfo = await JsonSerializer.DeserializeAsync<VehicleInfo>(responseStream, _jsonSerializerOptions);
 
             // log entry
             _logger.LogInformation($"ENTRY detected in lane {msg.Lane} at {msg.Timestamp.ToString("hh:mm:ss")}: " +

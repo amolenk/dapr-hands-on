@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TrafficControlService.Helpers;
 using TrafficControlService.Repositories;
+using System.Text.Json;
 
 namespace TrafficControlService
 {
@@ -26,9 +27,13 @@ namespace TrafficControlService
 
             services.AddHttpClient();
 
-            services.AddDaprClient();
-
             services.AddControllers();
+
+            services.AddDaprClient(builder => builder.UseJsonSerializationOptions(new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                PropertyNameCaseInsensitive = true
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using TrafficControlService.Events;
 using TrafficControlService.Helpers;
 using TrafficControlService.Models;
-using TrafficControlService.Repositories;
 using Dapr.Client;
 using Dapr.Client.Http;
 
@@ -19,7 +18,6 @@ namespace TrafficControlService.Controllers
     {
         private const string DAPR_STORE_NAME = "statestore";
         private readonly ILogger<TrafficController> _logger;
-        private readonly IVehicleStateRepository _repo;
         private readonly ISpeedingViolationCalculator _speedingViolationCalculator;
         private readonly string _roadId;
         private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions

@@ -10,7 +10,7 @@ In order to complete this assignment, the following goals must be met:
 
 ## DIY instructions
 
-First open the `Assignment 5` folder in this repo in VS Code. Then open the [dapr documentation](https://github.com/dapr/docs) and start hacking away. Make sure you use the default Reddis pub/sub component provided out of the box by dapr.
+First open the `Assignment 5` folder in this repo in VS Code. Then open the [dapr documentation](https://github.com/dapr/docs) and start hacking away. Make sure you use the default Redis pub/sub component provided out of the box by dapr.
 
 ## Step by step instructions
 

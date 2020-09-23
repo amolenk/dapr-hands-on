@@ -23,7 +23,8 @@ namespace TrafficControlService.Controllers
         private readonly string _roadId;
         private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
         {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            PropertyNameCaseInsensitive = true
         };
 
         public TrafficController(

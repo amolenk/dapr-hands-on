@@ -89,11 +89,18 @@ In order to make sure the dapr client is injected into the VehicleEntry method, 
 11. Add a using statement in the file to make sure you can use the dapr client:
    ```csharp
    using Dapr.Client;
+   using System.Text.Json;
    ```
-12. Add code to the `Configuration` method of the Startup class that registers the dapr client (immediately after the registration of the HttpClient):
+12. Add code at the end of the `Configuration` method of the Startup class that registers the dapr client:
    ```csharp
-   services.AddDaprClient();
+   services.AddDaprClient(builder => builder.UseJsonSerializationOptions(new JsonSerializerOptions()
+   {
+         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+         PropertyNameCaseInsensitive = true
+   }));
    ```
+   As you can see, a builder is specified to create the dapr client. The JsonSerializer options the dapr client must use for serializing and deserializing messages is passed in as an argument.
+
 Now you're going to start the TrafficControl service. This service does not need to run with a dapr sidecar because it uses the dapr client directly. Later you're going to add a side-car to this service.
 
 13. Make sure the Government service is running with the dapr side-car (as you did in step 1.2).

@@ -1,9 +1,8 @@
 using System;
-using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Simulation.Events;
+using Dapr.Client;
 
 namespace Simulation
 {
@@ -24,7 +23,7 @@ namespace Simulation
 
             // initialize state
             _rnd = new Random();
-            var httpClient = new HttpClient();
+            var daprClient = new DaprClientBuilder().Build();
 
             while (true)
             {
@@ -45,8 +44,7 @@ namespace Simulation
                             Timestamp = entryTimestamp
                         };
 
-                        var @eventJson = new StringContent(JsonSerializer.Serialize(@event, _jsonSerializerOptions), Encoding.UTF8, "application/json");
-                        httpClient.PostAsync("http://localhost:5000/trafficcontrol/entrycam", @eventJson).Wait();
+                        daprClient.PublishEventAsync(("pubsub", "trafficcontrol.entrycam", @event).Wait();
 
                         Console.WriteLine($"Simulated ENTRY of vehicle with license-number {@event.LicenseNumber} in lane {@event.Lane}");
 
@@ -55,8 +53,9 @@ namespace Simulation
                         Task.Delay(exitDelay).Wait();
                         @event.Timestamp = DateTime.Now;
                         @event.Lane = _rnd.Next(1, 4);
-                        @eventJson = new StringContent(JsonSerializer.Serialize(@event, _jsonSerializerOptions), Encoding.UTF8, "application/json");
-                        httpClient.PostAsync("http://localhost:5000/trafficcontrol/exitcam", @eventJson).Wait();
+
+                        daprClient.PublishEventAsync("pubsub", "trafficcontrol.exitcam", @event).Wait();
+
                         Console.WriteLine($"Simulated EXIT of vehicle with license-number {@event.LicenseNumber} in lane {@event.Lane}");
                     });
                 }

@@ -56,7 +56,7 @@ After completing all the assignments, the architecture has been changed to work 
 
 ![](img/dapr-setup.png)
 
-In the assignments, the Reddis component is used for both state management as well as for pub/sub.
+In the assignments, the Redis component is used for both state management as well as for pub/sub.
 
 
 

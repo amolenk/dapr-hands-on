@@ -41,27 +41,34 @@ For both these tasks you can use the dapr client for .NET.
     state.Value.ExitTimestamp = msg.Timestamp;
     await state.SaveAsync();
    ```
+9. Now that you are using the dapr state-management for storing vehicle state, remove everything with regards to the `VehicleStateRepository` from the code (do that in both the controller as the Startup class).
 
 Now you're ready to test the application.
 
+## Step 2: Test the application
+
 1. Make sure no services from previous tests are running (close the command-shell windows).
-2. Open a new command-shell window and go to the `Assignment02/src/GovernmentService` folder in this repo.
+2. Open a new command-shell window and go to the `Assignment03/src/GovernmentService` folder in this repo.
 3. Start the Government service:
    ```
    dapr run --app-id governmentservice --app-port 6000 --dapr-grpc-port 50001 dotnet run
    ```
-2. Open a new command-shell window and go to the `Assignment02/src/TrafficControlService` folder in this repo.
-3. Because the TrafficContol service is using the dapr state-management building block, you need to run this service with a dapr sidecar. The WebAPI is running on port 5000:
+2. Open a new command-shell window and go to the `Assignment03/src/TrafficControlService` folder in this repo.
+3. Start the TrafficControl service with a dapr sidecar. The WebAPI is running on port 5000:
    ```
    dapr run --app-id trafficcontrolservice --app-port 5000 dotnet run
    ```
-4. Open a new command-shell window and go to the `Assignment02/src/Simulation` folder in this repo.
+4. Open a new command-shell window and go to the `Assignment03/src/Simulation` folder in this repo.
 5. Start the Simulation:
    ```
    dotnet run
    ```
 
-You should see the same logs as before. Obviously, the behavior of the application is exactly the same as before. But are the VehicleState entries actually stored in the default Reddis state-store? To check this, you will use the reddis CLI inside the `dapr_redis` container that is used as state-store in the default dapr installation:
+You should see the same logs as before.
+
+## Step 2: Verify the state-store
+
+ Obviously, the behavior of the application is exactly the same as before. But are the VehicleState entries actually stored in the default Redis state-store? To check this, you will use the redis CLI inside the `dapr_redis` container that is used as state-store in the default dapr installation.
 
 1. Open a new command-shell window.
 2. Execute the following command to start the redis-cli inside the running `dapr_redis` container:
@@ -81,7 +88,7 @@ You should see the same logs as before. Obviously, the behavior of the applicati
 
    ![](img/redis-cli.png)
 
-As you can see, the data is actually stored in the reddis cache. The cool thing about dapr is that multiple components exist that implement the state-management building-block. So without changing any code but only specifying a different dapr configuration, you could use an entirely different storage mechanism. If you're up for it, try to swap-out reddis with another state provider (see the [dapr-documentation on state management](https://github.com/dapr/docs/blob/master/concepts/state-management/README.md)).
+As you can see, the data is actually stored in the redis cache. The cool thing about dapr is that multiple components exist that implement the state-management building-block. So without changing any code but only specifying a different dapr configuration, you could use an entirely different storage mechanism. If you're up for it, try to swap-out redis with another state provider (see the [dapr-documentation on state management](https://github.com/dapr/docs/blob/master/concepts/state-management/README.md)).
 
 
 ## Next assignment
