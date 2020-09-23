@@ -17,7 +17,7 @@ With the dapr pub/sub building-block, you use a *topic* to send and receive mess
 
 1. Open the file `Assignment04/src/TrafficControlService/Controllers/TrafficController.cs` in VS Code.
 
-2. Add a using statement int this file so you can use dapr classes:
+2. Add a using statement in this file so you can use dapr classes:
 
    ```csharp
     using Dapr;
