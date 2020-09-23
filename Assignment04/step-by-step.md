@@ -49,7 +49,7 @@ Now you need to make sure that dapr knows this controller and also knows which p
    services.AddControllers().AddDapr();
    ```
 
-3. Dapr can use the *CloudEvent* message-format standard when sending messages over pub/sub. To enable this, add the following line just after the call to `app.UseRouting();` in the `Configure` method:
+3. Dapr uses the *CloudEvent* message-format standard when sending messages over pub/sub. To enable this, add the following line just after the call to `app.UseRouting();` in the `Configure` method:
 
    ```csharp
    app.UseCloudEvents();
