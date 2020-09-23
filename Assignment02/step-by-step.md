@@ -9,7 +9,7 @@ In order to complete this assignment, the following goals must be met:
 
 ## Step 1: Run the Government service with dapr
 
-### Step 1.1: install dapr
+### Step 1.1: Install dapr
 
 If you haven't installed dapr stand-alone yet on your machine, first do that. If you already installed it, you can skip to step 1.2.
 
@@ -21,7 +21,7 @@ If you haven't installed dapr stand-alone yet on your machine, first do that. If
    ```
 4. Check the logging for errors.
 
-### Step 1.2: start the government service with dapr
+### Step 1.2: Start the government service with dapr
 
 You started the government service in assignment 01 using `dotnet run`. When you want to run this service with a dapr side-car that handles its communication, you need to start it using the dapr CLI. There are a couple of things you need to specify when starting the service:
 
@@ -41,7 +41,7 @@ You will use the `run` command of the dapr CLI and specify all the options above
 
 That's it, you're now running the Government service with a dapr side-car. This means other services can use dapr to call this service. This is what you'll do in the next step.
 
-### Step 1.3: call the government service using service-to-service invocation
+### Step 2: Call the government service using service-to-service invocation
 
 In this step, you're going to change the code of the TrafficControl service so it uses the dapr client for .NET to call the government service.
 
@@ -101,6 +101,8 @@ In order to make sure the dapr client is injected into the VehicleEntry method, 
    ```
    As you can see, a builder is specified to create the dapr client. The JsonSerializer options the dapr client must use for serializing and deserializing messages is passed in as an argument.
 
+## Step 3: Test the application
+
 Now you're going to start the TrafficControl service. This service does not need to run with a dapr sidecar because it uses the dapr client directly. Later you're going to add a side-car to this service.
 
 13. Make sure the Government service is running with the dapr side-car (as you did in step 1.2).
@@ -123,7 +125,11 @@ The services are up & running. Now you're going to test this using the simulatio
    dotnet run
    ```
 
-You should see similar logging as before when you ran the application. So how can you check whether or not the call to the Government service is handled by dapr? Well, dapr has some observability built in. You can look at dapr traffic using Zipkin:
+You should see similar logging as before when you ran the application.
+
+## Step 4: Use dapr observability
+
+So how can you check whether or not the call to the Government service is handled by dapr? Well, dapr has some observability built in. You can look at dapr traffic using Zipkin:
 
 1. Open a browser and go the this url: [http://localhost:9411/zipkin](http://localhost:9411/zipkin).
 2. Click the spyglass icon in the top right of the screen to search for traces.
