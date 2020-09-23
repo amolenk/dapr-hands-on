@@ -31,7 +31,7 @@ You started the government service in assignment 01 using `dotnet run`. When you
 
 - The service needs a unique id which dapr can use to find it. You will use `governmentservice` as the id.
 - The HTTP port the API is listening on is 6000. So you need to tell dapr that (so it can handle the communication).
-- The default port used by dapr for gRPC communication if port 50001. You also need to tell dapr to use this port for gRPC communication.
+- Dapr uses gRPC to communicate with the dapr side-car. The port used for this communication is `50001` by default. But this port will be used by the TrafficControl service later, so we need to specify a different port for the Government service to prevent a port clash on the local machine. We will use port `50002`.
 - Finally you need to tell dapr how to start the service. This is again `dotnet run`.
 
 You will use the `run` command of the dapr CLI and specify all the options above on the command-line:
@@ -41,7 +41,7 @@ You will use the `run` command of the dapr CLI and specify all the options above
 2. enter the following command to run the service with a dapr sidecar:
 
    ```
-   dapr run --app-id governmentservice --app-port 6000 --dapr-grpc-port 50001 dotnet run
+   dapr run --app-id governmentservice --app-port 6000 --dapr-grpc-port 50002 dotnet run
    ```
 
 3. Check the logs for any errors. As you can see, both dapr as well as application logging is shown as output.
@@ -143,19 +143,19 @@ Now you're going to start the TrafficControl service. This service does not need
    dotnet build
    ```
 
-4. If you see any warnings or errors, review the previous steps to make sure the code is correct.
+   If you see any warnings or errors, review the previous steps to make sure the code is correct.
 
-5. Start the TrafficControl service:
+4. Start the TrafficControl service with a dapr side-car. The default gRPC port used for communication with the dapr side-car is `50001`. If you use this port to run the side-car, you don't need to specify a port in our code when doing the service-to-service invocation. Specify this port when starting the service with dapr:
 
    ```
-   dotnet run
+   dapr run --app-id trafficcontrolservice --app-port 5000 --dapr-grpc-port 50001 dotnet run
    ```
 
 The services are up & running. Now you're going to test this using the simulation.
 
-6. Open a command-shell window and go to the `Assignment02/src/Simulation` folder in this repo.
+5. Open a command-shell window and go to the `Assignment02/src/Simulation` folder in this repo.
 
-7. Start the simulation:
+6. Start the simulation:
 
    ```
    dotnet run

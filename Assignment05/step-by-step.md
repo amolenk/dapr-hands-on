@@ -162,7 +162,7 @@ Now you're ready to add code to the TrafficControl service to read the API key f
 3. Start the Government service:
 
    ```
-   dapr run --app-id governmentservice --app-port 6000 --dapr-grpc-port 50001 dotnet run
+   dapr run --app-id governmentservice --app-port 6000 --dapr-grpc-port 50002 dotnet run
    ```
 
 2. Open a new command-shell window and go to the `Assignment05/src/TrafficControlService` folder in this repo.
@@ -170,7 +170,7 @@ Now you're ready to add code to the TrafficControl service to read the API key f
 3. Start the TrafficControl service with a dapr sidecar. The WebAPI is running on port 5000. Because the TrafficControl service needs to use the secret-store component, you have to specify the custom components folder you created earlier on the command-line:
 
    ```
-   dapr run --app-id trafficcontrolservice --app-port 5000 --components-path ./components dotnet run
+   dapr run --app-id trafficcontrolservice --app-port 5000 --dapr-grpc-port 50001 --components-path ./components dotnet run
    ```
 
    If you examine the dapr logging, you should see a line in there similar to this:
@@ -202,7 +202,7 @@ To test whether the secret-store actually works, you will change the secret in t
 4. Start the TrafficControl service with a dapr sidecar.
 
    ```
-   dapr run --app-id trafficcontrolservice --app-port 5000 --components-path ./components dotnet run
+   dapr run --app-id trafficcontrolservice --app-port 5000 --dapr-grpc-port 50001 --components-path ./components dotnet run
    ```
 
 5. Start the Simulation:

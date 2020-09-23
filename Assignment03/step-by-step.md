@@ -68,7 +68,7 @@ Now you're ready to test the application.
 3. Start the Government service:
 
    ```
-   dapr run --app-id governmentservice --app-port 6000 --dapr-grpc-port 50001 dotnet run
+   dapr run --app-id governmentservice --app-port 6000 --dapr-grpc-port 50002 dotnet run
    ```
 
 2. Open a new command-shell window and go to the `Assignment03/src/TrafficControlService` folder in this repo.
@@ -76,7 +76,7 @@ Now you're ready to test the application.
 3. Start the TrafficControl service with a dapr sidecar. The WebAPI is running on port 5000:
 
    ```
-   dapr run --app-id trafficcontrolservice --app-port 5000 dotnet run
+   dapr run --app-id trafficcontrolservice --app-port 5000 --dapr-grpc-port 50001 dotnet run
    ```
 
 4. Open a new command-shell window and go to the `Assignment03/src/Simulation` folder in this repo.
@@ -98,7 +98,7 @@ You should see the same logs as before.
 2. Execute the following command to start the redis-cli inside the running `dapr_redis` container:
 
    ```
-   docker exec -it dapr_redis dapr-cli
+   docker exec -it dapr_redis redis-cli
    ```
 
 3. In the redis-cli enter the following command to get the list of keys of items stored in the redis cache:

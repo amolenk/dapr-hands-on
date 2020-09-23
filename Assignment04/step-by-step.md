@@ -135,7 +135,7 @@ Now you're ready to test the application.
 3. Start the Government service:
 
    ```
-   dapr run --app-id governmentservice --app-port 6000 --dapr-grpc-port 50001 dotnet run
+   dapr run --app-id governmentservice --app-port 6000 --dapr-grpc-port 50002 dotnet run
    ```
 
 2. Open a new command-shell window and go to the `Assignment04/src/TrafficControlService` folder in this repo.
@@ -143,7 +143,7 @@ Now you're ready to test the application.
 3. Start the TrafficControl service with a dapr sidecar. The WebAPI is running on port 5000:
 
    ```
-   dapr run --app-id trafficcontrolservice --app-port 5000 dotnet run
+   dapr run --app-id trafficcontrolservice --app-port 5000 --dapr-grpc-port 50001 dotnet run
    ```
 
 4. Open a new command-shell window and go to the `Assignment04/src/Simulation` folder in this repo.
@@ -173,7 +173,7 @@ You can also check whether messages are actually sent through the Redis cache us
 4. Now restart the TrafficControl service:
 
    ```
-   dapr run --app-id trafficcontrolservice --app-port 5000 dotnet run
+   dapr run --app-id trafficcontrolservice --app-port 5000 --dapr-grpc-port 50001 dotnet run
    ```
 
 Now you should see that - although the simulation is not running - messages are coming into the TrafficControl service. This is one of the great advantages of using pub/sub messaging. The producer and consumer are decoupled from each-other and don't have to be online at the same time in order to work together.
