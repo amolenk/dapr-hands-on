@@ -2,7 +2,7 @@
 
 In this assignment, you're going to run the application to make sure everything works correctly.
 
-> To get started with this assignment, open the `Assignment 1` folder in this repo in VS Code.
+> If you want to check-out the code of the application, open the `Assignment 1` folder in this repo in VS Code.
 
 ### Step 1. Run the Government service
 
