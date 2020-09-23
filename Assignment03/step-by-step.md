@@ -2,8 +2,6 @@
 
 In this assignment, you're going to add dapr state management in the TrafficControl service to store vehicle information.
 
-> To get started with this assignment, open the `Assignment 3` folder in this repo in VS Code.
-
 ## Assignment goals
 
 In order to complete this assignment, the following goals must be met:
@@ -15,7 +13,8 @@ For both these tasks you can use the dapr client for .NET.
 
 ## Step 1: Use dapr state-management building block
 
-1. Open the file `Assignment03/src/TrafficControlService/Controllers/TrafficController.cs` in VS Code.
+1. Open the `Assignment 3` folder in this repo in VS Code.
+2. Open the file `Assignment03/src/TrafficControlService/Controllers/TrafficController.cs` in VS Code.
 3. Add a private const field holding the name of the state-store:
    ```csharp
     private const string DAPR_STORE_NAME = "statestore";

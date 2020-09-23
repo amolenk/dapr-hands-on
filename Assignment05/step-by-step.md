@@ -12,8 +12,7 @@ In order to complete this assignment, the following goals must be met:
 
 ## Step 1
 
+1. Open the `Assignment 5` folder in this repo in VS Code.
+
 ...
 
-## Next assignment
-
-Go to [assignment 5](../Assignment05/README.md).

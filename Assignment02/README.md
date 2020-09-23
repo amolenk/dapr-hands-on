@@ -1,8 +1,6 @@
 # dapr hands-on - Assignment 2 - Add dapr service invocation
 
-In this assignment, you're going to add dapr into the mix. You will use the Service-to-service Invocation building-block.
-
-> To get started with this assignment, open the `Assignment 2` folder in this repo in VS Code.
+In this assignment, you're going to add dapr into the mix. You will use the Service-to-service Invocation building-block. Before you start with this assignment, read the [introduction to this building-block](https://github.com/dapr/docs/blob/master/concepts/service-invocation/README.md) in the dapr documentation.
 
 ## Assignment goals
 
@@ -13,7 +11,7 @@ In order to complete this assignment, the following goals must be met:
 
 ## DIY instructions
 
-Open the [dapr documentation](https://github.com/dapr/docs) and start hacking away. Make sure the Government service is using `50001` as the dapr-grpc-port. If you need any hints, you may peek in the step-by-step part.
+First open the `Assignment 2` folder in this repo in VS Code. Then open the [dapr documentation](https://github.com/dapr/docs) and start hacking away. Make sure the Government service is using `50001` as the dapr-grpc-port. If you need any hints, you may peek in the step-by-step part.
 
 ## Step by step instructions
 

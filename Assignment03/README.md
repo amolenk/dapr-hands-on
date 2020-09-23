@@ -2,8 +2,6 @@
 
 In this assignment, you're going to add dapr state management in the TrafficControl service to store vehicle information.
 
-> To get started with this assignment, open the `Assignment 3` folder in this repo in VS Code.
-
 ## Assignment goals
 
 In order to complete this assignment, the following goals must be met:
@@ -15,7 +13,7 @@ For both these tasks you can use the dapr client for .NET.
 
 ## DIY instructions
 
-Open the [dapr documentation](https://github.com/dapr/docs) and start hacking away. Make sure you use the default Reddis state-store component provided out of the box by dapr.
+First open the `Assignment 3` folder in this repo in VS Code. Then open the [dapr documentation](https://github.com/dapr/docs) and start hacking away. Make sure you use the default Reddis state-store component provided out of the box by dapr.
 
 ## Step by step instructions
 
