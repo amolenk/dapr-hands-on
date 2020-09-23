@@ -174,4 +174,6 @@ Basically you can follow the same steps as you did earlier in this assignment bu
 
 ## Next assignment
 
+Make sure you stop all running processes before proceeding to the next assignment.
+
 Go to [assignment 5](../Assignment05/README.md).

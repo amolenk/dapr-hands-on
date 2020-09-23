@@ -21,4 +21,6 @@ To get step-by-step instructions to achieve the goals, open the [step-by-step in
 
 ## Next assignment
 
+Make sure you stop all running processes before proceeding to the next assignment.
+
 Go to [assignment 3](../Assignment03/README.md).

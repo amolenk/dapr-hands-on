@@ -220,5 +220,3 @@ Now you should see some errors in the logging because the TrafficControl service
    ```
 
 Don't forget change the API key in the secrets file back to the correct API key.
-
-

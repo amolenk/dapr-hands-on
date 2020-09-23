@@ -124,4 +124,6 @@ As you can see, the data is actually stored in the redis cache. The cool thing a
 
 ## Next assignment
 
+Make sure you stop all running processes before proceeding to the next assignment.
+
 Go to [assignment 4](../Assignment04/README.md).

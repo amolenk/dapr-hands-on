@@ -170,4 +170,6 @@ So how can you check whether or not the call to the Government service is handle
 
 ## Next assignment
 
+Make sure you stop all running processes before proceeding to the next assignment.
+
 Go to [assignment 3](../Assignment03/README.md).
