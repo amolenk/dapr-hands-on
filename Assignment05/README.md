@@ -1,17 +1,34 @@
 # Assignment 5 - Add secrets
 
-In this assignment, you're going to add Dapr secret management to retrieve an API key for calling the RDW Government service.
+In this assignment, you're going to add Dapr **secrets management** to retrieve an API key for calling the RDW Government service.
 
-Before you start with this assignment, read the [introduction to this building-block](https://github.com/dapr/docs/blob/master/concepts/secrets/README.md) in the Dapr documentation.
+## Dapr secrets management building block
 
-For this assignment you are supposed to use the file-based local secret-store component. This is only for development or testing purposes. Never use this component in production!
+Almost all non-trivial applications need to _securely_ store secret data like API keys, database passwords, and more. By nature, these secrets should not be checked into the version control system, but they also need to be accessible to code running in production. This is generally a hard problem, but it's critical to get it right. Otherwise, critical production systems can be compromised.
+
+Dapr's solution to this problem is the secrets API and secrets stores.
+
+Here's how it works:
+
+- Dapr is set up to use a **secret store** - a place to securely store secret data
+- Application code uses the standard Dapr secrets API to retrieve secrets.
+
+Some examples for secret stores include `Kubernetes`, `Hashicorp Vault`, `Azure KeyVault`.
+
+Application code can call the secrets building block API to retrieve secrets from Dapr supported secret stores that can be used in your code. For example, the diagram below shows an application requesting the secret called "mysecret" from a secret store called "vault" from a configured cloud secret store:
+
+![](img/secrets_cloud_stores.png)
+
+> For this assignment you are supposed to use the file-based local secret-store component. This is only for development or testing purposes. Never use this component in production!
+
+For this hands-on assignment, this is all you need to know about this building-block. If you want to get more detailed information, read the [introduction to this building-block](https://github.com/dapr/docs/blob/master/concepts/secrets/README.md) in the Dapr documentation.
 
 ## Assignment goals
 
 In order to complete this assignment, the following goals must be met:
 
 - The `GetVehicleDetails` method of the `RDWController` in the Government service requires an API key to be specified in the URL like this: `/rdw/{apiKey}/vehicle/{licenseNumber}`.
-- The TrafficControl service reads this API key from a Dapr secret store.
+- The TrafficControl service reads this API key from a Dapr secret store and passes it in the call to the Government service.
 
 ## DIY instructions
 

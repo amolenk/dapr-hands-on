@@ -5,7 +5,7 @@
 In order to complete this assignment, the following goals must be met:
 
 - The `GetVehicleDetails` method of the `RDWController` in the Government service requires an API key to be specified in the URL like this: `/rdw/{apiKey}/vehicle/{licenseNumber}`.
-- The TrafficControl service reads this API key from a Dapr secret store.
+- The TrafficControl service reads this API key from a Dapr secret store and passes it in the call to the Government service.
 
 ## Step 1: Add API key requirement to the RDW controller
 
