@@ -4,7 +4,7 @@ In this assignment, you're going to add Dapr into the mix. You will use the **Se
 
 ## Dapr Service-to-service invocation building block
 
-In a microservices application, it is important to be able to communicate with other services without knowing where they live. Especially when the services are running in Kubernetes (or some other orchestration platform), services can be moved around and replaced with new version all the time. This is where the Dapr service-to-service building block comes in. It works like this:
+In a microservices application, it is important to be able to communicate with other services without knowing where they live. Especially when the services are running in Kubernetes (or some other orchestration platform), services can be moved around and replaced with a new version all the time. This is where the Dapr service-to-service building block comes in. It works like this:
 
 ![](img/service-invocation.png)
 
