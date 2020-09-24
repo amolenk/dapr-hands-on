@@ -5,7 +5,7 @@
 In order to complete this assignment, the following goals must be met:
 
 - The `GetVehicleDetails` method of the `RDWController` in the Government service requires an API key to be specified in the URL like this: `/rdw/{apiKey}/vehicle/{licenseNumber}`.
-- The TrafficControl service reads this API key from a dapr secret store.
+- The TrafficControl service reads this API key from a Dapr secret store.
 
 ## Step 1: Add API key requirement to the RDW controller
 
@@ -37,19 +37,19 @@ First you going to change the `GetVehicleDetails` method of the `RDWController` 
     }
    ```
 
-   Obviously this is NOT the way you would implement security in a real-life system! But for now the focus is on the use of the dapr secret-store component and not the security of the sample application.
+   Obviously this is NOT the way you would implement security in a real-life system! But for now the focus is on the use of the Dapr secret-store component and not the security of the sample application.
 
 This concludes the work on the Government service.
 
 ## Step 2: Add a secret-store component
 
-Before you can use the dapr secret-store from the TrafficControl service, we first have to add this component to the dapr configuration. By default, when you install dapr there are 3 components installed:
+Before you can use the Dapr secret-store from the TrafficControl service, we first have to add this component to the Dapr configuration. By default, when you install Dapr there are 3 components installed:
 
 - pub/sub (Redis cache)
 - State-store (Redis cache)
 - Observability (Zipkin)
 
-Each one of these components is configured using a yaml file in a well known location (e.g. on Windows this is the `.dapr/components` folder in your user's profile folder). By default, dapr uses these config files when starting an application with a dapr sidecar. But you can specify a different location on the command-line. You will do that later when you're testing the application and therefore you are going to create a custom components folder for the TrafficControl service.
+Each one of these components is configured using a yaml file in a well known location (e.g. on Windows this is the `.dapr/components` folder in your user's profile folder). By default, Dapr uses these config files when starting an application with a Dapr sidecar. But you can specify a different location on the command-line. You will do that later when you're testing the application and therefore you are going to create a custom components folder for the TrafficControl service.
 
 1. Create a new folder: `Assignment05/src/TrafficControlService/components`.
 2. Create a new file in this folder named `pubsub.yaml` and paste this snippet into the file:
@@ -68,7 +68,7 @@ Each one of these components is configured using a yaml file in a well known loc
         value: ""
    ```
 
-   This is how you configure dapr components. They have a name which you can use in your code to secify the component to use (remember the `pubsub` name you used in the previous assignment when publishing or subscribing to a pub/sub topic). They also have a type (to specify the building-block (pub/sub in this case) and component (Redis in this case)).
+   This is how you configure Dapr components. They have a name which you can use in your code to secify the component to use (remember the `pubsub` name you used in the previous assignment when publishing or subscribing to a pub/sub topic). They also have a type (to specify the building-block (pub/sub in this case) and component (Redis in this case)).
 
 3. Create a new file in the components folder named `statestore.yaml` and paste this snippet into the file:
 
@@ -114,7 +114,7 @@ Each one of these components is configured using a yaml file in a well known loc
     }
    ```
 
-   This file holds the secrets you want to use in your application. Now we need a secret-store component that uses this file so we can read the secrets using the dapr client.
+   This file holds the secrets you want to use in your application. Now we need a secret-store component that uses this file so we can read the secrets using the Dapr client.
 
 6. Create a new file in the components folder named `secrets-file.yaml` and paste this snippet into the file:
 
@@ -151,7 +151,7 @@ Now you're ready to add code to the TrafficControl service to read the API key f
         new HTTPExtension { Verb = HTTPVerb.Get });
    ```
 
-   As you can see, you first use the dapr client to get the secret with key `rdw-api-key` from the local secret-store. This returns a dictionary of values. Then you get the API key from the dictionary and pass it in the service-to-service invocation.
+   As you can see, you first use the Dapr client to get the secret with key `rdw-api-key` from the local secret-store. This returns a dictionary of values. Then you get the API key from the dictionary and pass it in the service-to-service invocation.
 
 ## Step 4: Test the application
 
@@ -167,13 +167,13 @@ Now you're ready to add code to the TrafficControl service to read the API key f
 
 2. Open a new command-shell window and go to the `Assignment05/src/TrafficControlService` folder in this repo.
 
-3. Start the TrafficControl service with a dapr sidecar. The WebAPI is running on port 5000. Because the TrafficControl service needs to use the secret-store component, you have to specify the custom components folder you created earlier on the command-line:
+3. Start the TrafficControl service with a Dapr sidecar. The WebAPI is running on port 5000. Because the TrafficControl service needs to use the secret-store component, you have to specify the custom components folder you created earlier on the command-line:
 
    ```
    dapr run --app-id trafficcontrolservice --app-port 5000 --dapr-grpc-port 50001 --components-path ./components dotnet run
    ```
 
-   If you examine the dapr logging, you should see a line in there similar to this:
+   If you examine the Dapr logging, you should see a line in there similar to this:
 
    ```
    == DAPR == time="2020-09-23T12:08:50.7645912+02:00" level=info msg="found component local-secret-store (secretstores.local.localsecretstore)" app_id=trafficcontrolservice ...
@@ -199,7 +199,7 @@ To test whether the secret-store actually works, you will change the secret in t
 
 3. Change the value of the `rdw-api-key` secret in the `secrets.json` file in the components folder to some random string.
 
-4. Start the TrafficControl service with a dapr sidecar.
+4. Start the TrafficControl service with a Dapr sidecar.
 
    ```
    dapr run --app-id trafficcontrolservice --app-port 5000 --dapr-grpc-port 50001 --components-path ./components dotnet run

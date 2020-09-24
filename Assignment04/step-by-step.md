@@ -4,20 +4,20 @@
 
 In order to complete this assignment, the following goals must be met:
 
-1. The simulation uses the dapr client to send messages over pub/sub to the TrafficControl service (vehicle entry and vehicle exit).
-2. The TrafficControl service uses the dapr client to send messages to the Government service (for communicating speeding violations to the CJIB).
+1. The simulation uses the Dapr client to send messages over pub/sub to the TrafficControl service (vehicle entry and vehicle exit).
+2. The TrafficControl service uses the Dapr client to send messages to the Government service (for communicating speeding violations to the CJIB).
 
 ## Step 1: Make the WebAPI methods pub/sub consumers
 
 1. Open the `Assignment 4` folder in this repo in VS Code.
 
-First you are going to prepare the TrafficControl service so it can receive messages sent using dapr pub/sub.
+First you are going to prepare the TrafficControl service so it can receive messages sent using Dapr pub/sub.
 
-With the dapr pub/sub building-block, you use a *topic* to send and receive messages. The producer sends messages to the topic and a (or more) consumer(s) subscribe to this topic to receive messages. The dapr ASP.NET integration library offers an elegant way of linking an WebAPI method to a pub/sub topic. For every message sent to that topic, the WebAPI method is called (as if it was called directly over HTTP).
+With the Dapr pub/sub building-block, you use a *topic* to send and receive messages. The producer sends messages to the topic and a (or more) consumer(s) subscribe to this topic to receive messages. The Dapr ASP.NET integration library offers an elegant way of linking an WebAPI method to a pub/sub topic. For every message sent to that topic, the WebAPI method is called (as if it was called directly over HTTP).
 
 1. Open the file `Assignment04/src/TrafficControlService/Controllers/TrafficController.cs` in VS Code.
 
-2. Add a using statement in this file so you can use dapr classes:
+2. Add a using statement in this file so you can use Dapr classes:
 
    ```csharp
     using Dapr;
@@ -37,9 +37,9 @@ With the dapr pub/sub building-block, you use a *topic* to send and receive mess
     [Topic("pubsub", "trafficcontrol.exitcam")]
    ```
 
-## Step 2: Integrate dapr into ASP.NET Core
+## Step 2: Integrate Dapr into ASP.NET Core
 
-Now you need to make sure that dapr knows this controller and also knows which pub/sub topics the controller subscribes to. To determine this, dapr will call your service on a default endpoint to retrieve the subscriptions. To make sure your service handles this request and returns the correct information, you need to add some stuff to the `Startup` class:
+Now you need to make sure that Dapr knows this controller and also knows which pub/sub topics the controller subscribes to. To determine this, Dapr will call your service on a default endpoint to retrieve the subscriptions. To make sure your service handles this request and returns the correct information, you need to add some stuff to the `Startup` class:
 
 1. Open the file `Assignment04/src/TrafficControlService/Startup.cs` in VS Code.
 
@@ -65,7 +65,7 @@ Now you need to make sure that dapr knows this controller and also knows which p
    });
    ```
 
-This is the receiving part done. Now you need to update the simulation so that it uses dapr pub/sub to send messages to the TrafficControl service.
+This is the receiving part done. Now you need to update the simulation so that it uses Dapr pub/sub to send messages to the TrafficControl service.
 
 ## Step 3: Publish messages from the Simulation to the TrafficControl service
 
@@ -77,7 +77,7 @@ This is the receiving part done. Now you need to update the simulation so that i
    dotnet remove package System.Net.Http
    ```
 
-3. Add a reference to the dapr client for .NET version 0.10.0-preview01:
+3. Add a reference to the Dapr client for .NET version 0.10.0-preview01:
 
    ```
    dotnet add package Dapr.Client -v 0.10.0-preview01
@@ -91,13 +91,13 @@ This is the receiving part done. Now you need to update the simulation so that i
 
 5. Open the file `Assignment04/src/Simulation/CameraSimulation.cs` in VS Code.
 
-6. In this file, remove the using statement for `System.Net.Http` and add one for using the dapr client:
+6. In this file, remove the using statement for `System.Net.Http` and add one for using the Dapr client:
 
    ```csharp
    using Dapr.Client;
    ```
 
-7. Replace the creation of an `HttpClient` in the `Start` method with the creation of a dapr client. Later in this assignment, you will start the Simulation with its own dapr side-car. You need to specify the gRPC port that will be used for communicating with the side-car (`50003`):
+7. Replace the creation of an `HttpClient` in the `Start` method with the creation of a Dapr client. Later in this assignment, you will start the Simulation with its own Dapr side-car. You need to specify the gRPC port that will be used for communicating with the side-car (`50003`):
 
    ```csharp
    var daprClient = new DaprClientBuilder()
@@ -112,15 +112,15 @@ This is the receiving part done. Now you need to update the simulation so that i
    httpClient.PostAsync("http://localhost:5000/trafficcontrol/entrycam", @eventJson).Wait();
    ```
 
-   with this call to the dapr client:
+   with this call to the Dapr client:
 
    ```csharp
    daprClient.PublishEventAsync("pubsub", "trafficcontrol.entrycam", @event).Wait();
    ```
 
-   As you can see, this uses the same topic-name (*trafficcontrol.entrycam*) as we used in the TrafficControl service. The "pubsub" argument passed into the `PublishEventAsync` method is the name of the pub/sub component to use. By default dapr uses the Redis cache installed with dapr as message broker.
+   As you can see, this uses the same topic-name (*trafficcontrol.entrycam*) as we used in the TrafficControl service. The "pubsub" argument passed into the `PublishEventAsync` method is the name of the pub/sub component to use. By default Dapr uses the Redis cache installed with Dapr as message broker.
 
-9. Also replace the Http client code with the dapr client for the exit event:
+9. Also replace the Http client code with the Dapr client for the exit event:
 
    ```csharp
    daprClient.PublishEventAsync("pubsub", "trafficcontrol.exitcam", @event).Wait();
@@ -142,7 +142,7 @@ Now you're ready to test the application.
 
 2. Open a new command-shell window and go to the `Assignment04/src/TrafficControlService` folder in this repo.
 
-3. Start the TrafficControl service with a dapr sidecar. The WebAPI is running on port 5000:
+3. Start the TrafficControl service with a Dapr sidecar. The WebAPI is running on port 5000:
 
    ```
    dapr run --app-id trafficcontrolservice --app-port 5000 --dapr-grpc-port 50001 dotnet run
@@ -156,13 +156,13 @@ Now you're ready to test the application.
    dapr run --app-id simulation --dapr-grpc-port 50003 dotnet run
    ```
 
-You should see the same logs as before. Obviously, the behavior of the application is exactly the same as before. But if you look closely at the dapr logs of the TrafficControl service, you should see something like this in there:
+You should see the same logs as before. Obviously, the behavior of the application is exactly the same as before. But if you look closely at the Dapr logs of the TrafficControl service, you should see something like this in there:
 
 ```
 == DAPR == time="2020-09-23T08:05:34.2950896+02:00" level=info msg="app is subscribed to the following topics: [trafficcontrol.entrycam trafficcontrol.exitcam] through pubsub=pubsub" app_id=trafficcontrolservice ...
 ```
 
-So you can see that dapr has asked the service which topics it subscribes on and created the subscriptions. You can also check whether messages are actually sent through the Redis cache.
+So you can see that Dapr has asked the service which topics it subscribes on and created the subscriptions. You can also check whether messages are actually sent through the Redis cache.
 
 ## Step 5: Validate use of the Redis cache as message-queue
 

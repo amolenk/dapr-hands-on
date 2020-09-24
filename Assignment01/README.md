@@ -64,7 +64,7 @@ You've tested the APIs directly by using a REST client. Now you're going to run 
 
    ![Simulation logging](img/logging-simulation.png)
 
-Now we know the application runs correctly. It's time to start adding dapr to the application.
+Now we know the application runs correctly. It's time to start adding Dapr to the application.
 
 ## Next assignment
 

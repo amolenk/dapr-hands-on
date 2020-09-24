@@ -1,8 +1,8 @@
 # Assignment 5 - Add secrets
 
-In this assignment, you're going to add dapr secret management to retrieve an API key for calling the RDW Government service.
+In this assignment, you're going to add Dapr secret management to retrieve an API key for calling the RDW Government service.
 
-Before you start with this assignment, read the [introduction to this building-block](https://github.com/dapr/docs/blob/master/concepts/secrets/README.md) in the dapr documentation.
+Before you start with this assignment, read the [introduction to this building-block](https://github.com/dapr/docs/blob/master/concepts/secrets/README.md) in the Dapr documentation.
 
 For this assignment you are supposed to use the file-based local secret-store component. This is only for development or testing purposes. Never use this component in production!
 
@@ -11,11 +11,11 @@ For this assignment you are supposed to use the file-based local secret-store co
 In order to complete this assignment, the following goals must be met:
 
 - The `GetVehicleDetails` method of the `RDWController` in the Government service requires an API key to be specified in the URL like this: `/rdw/{apiKey}/vehicle/{licenseNumber}`.
-- The TrafficControl service reads this API key from a dapr secret store.
+- The TrafficControl service reads this API key from a Dapr secret store.
 
 ## DIY instructions
 
-First open the `Assignment 5` folder in this repo in VS Code. Then open the [dapr documentation](https://github.com/dapr/docs) and start hacking away. Make sure you use the default Redis pub/sub component provided out of the box by dapr.
+First open the `Assignment 5` folder in this repo in VS Code. Then open the [Dapr documentation](https://github.com/dapr/docs) and start hacking away. Make sure you use the default Redis pub/sub component provided out of the box by dapr.
 
 ## Next assignment
 

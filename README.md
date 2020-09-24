@@ -1,13 +1,13 @@
-# dapr hands-on
+# Dapr hands-on
 
-This repository contains several hands-on assignments that will introduce you to dapr. You will start with a simple ASP.NET Core application that contains a number of services. In each assignment, you will change a part of the application so it works with dapr (or "rub some dapr on it" as Donovan Brown would say). The dapr features you will be working with are:
+This repository contains several hands-on assignments that will introduce you to Dapr. You will start with a simple ASP.NET Core application that contains a number of services. In each assignment, you will change a part of the application so it works with Dapr (or "rub some Dapr on it" as Donovan Brown would say). The Dapr features you will be working with are:
 
 - Service invocation
 - State-management
 - Publish / Subscribe
 - Secrets
 
-For the assignments, you will be using dapr in stad-alone mode. As a stretch goal, we added a last assignment that will ask you to run the dapr application on Kubernetes.
+For the assignments, you will be using Dapr in stad-alone mode. As a stretch goal, we added a last assignment that will ask you to run the Dapr application on Kubernetes.
 
 ## The domain
 
@@ -52,7 +52,7 @@ All actions described in this sequence are logged to the console during executio
 
 ### End-state
 
-After completing all the assignments, the architecture has been changed to work with dapr. For communicating messages, the **publish and subscribe** building-block is used. For doing request/response type communication with a service, the  **service-to-service invocation** building-block is used. And for storing the state of a vehicle, the **state management** building-block is used.
+After completing all the assignments, the architecture has been changed to work with Dapr. For communicating messages, the **publish and subscribe** building-block is used. For doing request/response type communication with a service, the  **service-to-service invocation** building-block is used. And for storing the state of a vehicle, the **state management** building-block is used.
 
 ![](img/dapr-setup.png)
 
@@ -69,9 +69,9 @@ Make sure you have the following prerequisites installed on your machine:
 - Docker for desktop ([download]())
 - Dapr CLI 0.10.0 ([download](https://github.com/dapr/cli/releases/tag/v0.10.0))
 
-### Install dapr
+### Install Dapr
 
-If you haven't installed dapr stand-alone yet on your machine, first do that. If you already installed it, you can skip this.
+If you haven't installed Dapr stand-alone yet on your machine, first do that. If you already installed it, you can skip this.
 
 1. Make sure you have docker for desktop running on your machine.
 
@@ -89,7 +89,7 @@ If you haven't installed dapr stand-alone yet on your machine, first do that. If
 
 Every assignment is contained in a separate folder in this repo. Each folder contains the description of the assignment that you can follow. The folder also contains the starting-point of the application as if the previous assignment was executed correctly.
 
-Every description of an assignment (accept the first one) contains two parts with each a certain approach to executing the assignment: a **DIY** part and a **step-by-step** part. The DIY part just states the outcome you need to achieve and no further instructions. It's entirely up to you to achieve the goals with the help of the dapr documentation. The step-by-step part describes exactly what you need to change in the application step-by-step. It's up to you to pick an approach. If you pick the DIY approach and get stuck, you can always go to the step-by-step approach for some help.
+Every description of an assignment (accept the first one) contains two parts with each a certain approach to executing the assignment: a **DIY** part and a **step-by-step** part. The DIY part just states the outcome you need to achieve and no further instructions. It's entirely up to you to achieve the goals with the help of the Dapr documentation. The step-by-step part describes exactly what you need to change in the application step-by-step. It's up to you to pick an approach. If you pick the DIY approach and get stuck, you can always go to the step-by-step approach for some help.
 
 Now it's time for you to get your hands dirty and start with the first assignment started:
 
