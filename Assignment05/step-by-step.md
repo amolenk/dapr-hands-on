@@ -1,4 +1,4 @@
-# dapr hands-on - Assignment 5 - Add secrets
+# Assignment 5 - Add secrets
 
 ## Assignment goals
 

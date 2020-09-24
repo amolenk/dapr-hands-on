@@ -1,4 +1,4 @@
-# dapr hands-on - Assignment 4 - Add pub/sub messaging
+# Assignment 4 - Add pub/sub messaging
 
 ## Assignment goals
 

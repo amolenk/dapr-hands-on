@@ -1,4 +1,4 @@
-# dapr hands-on - Assignment 3 - Add dapr state management
+# Assignment 3 - Add dapr state management
 
 ## Assignment goals
 

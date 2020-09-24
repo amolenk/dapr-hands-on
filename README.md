@@ -58,8 +58,6 @@ After completing all the assignments, the architecture has been changed to work 
 
 In the assignments, the Redis component is used for both state management as well as for pub/sub.
 
-
-
 ## Getting started
 
 ### Prerequisites
@@ -68,7 +66,24 @@ Make sure you have the following prerequisites installed on your machine:
 
 - .NET Core 3.1 ([download](https://dotnet.microsoft.com/download/dotnet-core/3.1))
 - Visual Studio Code ([download](https://code.visualstudio.com/download))
+- Docker for desktop ([download]())
 - Dapr CLI 0.10.0 ([download](https://github.com/dapr/cli/releases/tag/v0.10.0))
+
+### Install dapr
+
+If you haven't installed dapr stand-alone yet on your machine, first do that. If you already installed it, you can skip this.
+
+1. Make sure you have docker for desktop running on your machine.
+
+2. Open a new command-shell window.
+
+3. enter the following command:
+
+   ```
+   dapr init
+   ```
+
+4. Check the logging for errors.
 
 ### Instructions
 

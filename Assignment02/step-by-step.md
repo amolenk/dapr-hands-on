@@ -1,4 +1,4 @@
-# dapr hands-on - Assignment 2 - Add dapr service invocation
+# Assignment 2 - Add dapr service invocation
 
 ## Assignment goals
 
@@ -7,27 +7,9 @@ In order to complete this assignment, the following goals must be met:
 - The Government service is started running dapr.
 - The TrafficControl service uses the dapr client for .NET to call the GetVehicleInfo method on the Government service using a dapr direct service-to-service invocation.
 
-## Step 1: Run the Government service with dapr
+### Step 1: Start the government service with dapr
 
-### Step 1.1: Install dapr
-
-If you haven't installed dapr stand-alone yet on your machine, first do that. If you already installed it, you can skip to step 1.2.
-
-1. Make sure you have docker for desktop running on your machine.
-
-2. Open a new command-shell window.
-
-3. enter the following command:
-
-   ```
-   dapr init
-   ```
-
-4. Check the logging for errors.
-
-### Step 1.2: Start the government service with dapr
-
-You started the government service in assignment 01 using `dotnet run`. When you want to run this service with a dapr side-car that handles its communication, you need to start it using the dapr CLI. There are a couple of things you need to specify when starting the service:
+You started the government service in assignment 1 using `dotnet run`. When you want to run this service with a dapr side-car that handles its communication, you need to start it using the dapr CLI. There are a couple of things you need to specify when starting the service:
 
 - The service needs a unique id which dapr can use to find it. You will use `governmentservice` as the id.
 - The HTTP port the API is listening on is 6000. So you need to tell dapr that (so it can handle the communication).
@@ -133,7 +115,7 @@ In order to make sure the dapr client is injected into the VehicleEntry method, 
 
 Now you're going to start the TrafficControl service. This service does not need to run with a dapr sidecar because it uses the dapr client directly. Later you're going to add a side-car to this service.
 
-1. Make sure the Government service is (still) running with the dapr side-car (as you did in step 1.2).
+1. Make sure the Government service is (still) running with the dapr side-car (as you did in step 1).
 
 2. Open a new command-shell window and go to the `Assignment02/src/TrafficControlService` folder in this repo.
 

@@ -1,4 +1,4 @@
-# dapr hands-on - Assignment 5 - Add secrets
+# Assignment 5 - Add secrets
 
 In this assignment, you're going to add dapr secret management to retrieve an API key for calling the RDW Government service.
 
