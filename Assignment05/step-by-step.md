@@ -24,17 +24,17 @@ First you going to change the `GetVehicleDetails` method of the `RDWController` 
 4. Change the `GetVehicleDetails` method so it contains an API key part:
 
    ```csharp
-    [HttpGet("rdw/{apikey}/vehicle/{licenseNumber}")]
-    public ActionResult<VehicleInfo> GetVehicleDetails(string apiKey, string licenseNumber)
+   [HttpGet("rdw/{apikey}/vehicle/{licenseNumber}")]
+   public ActionResult<VehicleInfo> GetVehicleDetails(string apiKey, string licenseNumber)
    ```
 
 5. Add a check at the start of the method to check the API key:
 
    ```csharp
-    if (apiKey != SUPER_SECRET_API_KEY)
-    {
-        return Unauthorized();
-    }
+   if (apiKey != SUPER_SECRET_API_KEY)
+   {
+       return Unauthorized();
+   }
    ```
 
    Obviously this is NOT the way you would implement security in a real-life system! But for now the focus is on the use of the Dapr secret-store component and not the security of the sample application.
@@ -55,17 +55,17 @@ Each one of these components is configured using a yaml file in a well known loc
 2. Create a new file in this folder named `pubsub.yaml` and paste this snippet into the file:
 
    ```yaml
-    apiVersion: dapr.io/v1alpha1
-    kind: Component
-    metadata:
-    name: pubsub
-    spec:
-    type: pubsub.redis
-    metadata:
-    - name: redisHost
-        value: localhost:6379
-    - name: redisPassword
-        value: ""
+   apiVersion: dapr.io/v1alpha1
+   kind: Component
+   metadata:
+     name: pubsub
+   spec:
+     type: pubsub.redis
+     metadata:
+       - name: redisHost
+         value: localhost:6379
+       - name: redisPassword
+         value: ""
    ```
 
    This is how you configure Dapr components. They have a name which you can use in your code to secify the component to use (remember the `pubsub` name you used in the previous assignment when publishing or subscribing to a pub/sub topic). They also have a type (to specify the building-block (pub/sub in this case) and component (Redis in this case)).
@@ -73,35 +73,35 @@ Each one of these components is configured using a yaml file in a well known loc
 3. Create a new file in the components folder named `statestore.yaml` and paste this snippet into the file:
 
    ```yaml
-    apiVersion: dapr.io/v1alpha1
-    kind: Component
-    metadata:
-    name: statestore
-    spec:
-    type: state.redis
-    metadata:
-    - name: redisHost
-        value: localhost:6379
-    - name: redisPassword
-        value: ""
-    - name: actorStateStore
-        value: "true"
+   apiVersion: dapr.io/v1alpha1
+   kind: Component
+   metadata:
+     name: statestore
+   spec:
+     type: state.redis
+     metadata:
+       - name: redisHost
+         value: localhost:6379
+       - name: redisPassword
+         value: ""
+       - name: actorStateStore
+         value: "true"
    ```
 
 4. Create a new file in the components folder named `zipkin.yaml` and paste this snippet into the file:
 
    ```yaml
-    apiVersion: dapr.io/v1alpha1
-    kind: Component
-    metadata:
-    name: zipkin
-    spec:
-    type: exporters.zipkin
-    metadata:
-    - name: enabled
-        value: "true"
-    - name: exporterAddress
-        value: http://localhost:9411/api/v2/spans
+   apiVersion: dapr.io/v1alpha1
+   kind: Component
+   metadata:
+     name: zipkin
+   spec:
+     type: exporters.zipkin
+     metadata:
+       - name: enabled
+         value: "true"
+       - name: exporterAddress
+         value: http://localhost:9411/api/v2/spans
    ```
 
    You basically recreated the default set of components as installed by dapr.
@@ -109,9 +109,9 @@ Each one of these components is configured using a yaml file in a well known loc
 5. Create a new file in the components folder names `secrets.json` and paste this snippet into the file:
 
    ```json
-    {
-        "rdw-api-key": "A6k9D42L061Fx4Rm2K8"
-    }
+   {
+       "rdw-api-key": "A6k9D42L061Fx4Rm2K8"
+   }
    ```
 
    This file holds the secrets you want to use in your application. Now we need a secret-store component that uses this file so we can read the secrets using the Dapr client.
@@ -119,16 +119,16 @@ Each one of these components is configured using a yaml file in a well known loc
 6. Create a new file in the components folder named `secrets-file.yaml` and paste this snippet into the file:
 
    ```yaml
-    apiVersion: dapr.io/v1alpha1
-    kind: Component
-    metadata:
-    name: local-secret-store
-    namespace: default
-    spec:
-    type: secretstores.local.localsecretstore
-    metadata:
-    - name: secretsFile
-        value: components/secrets.json
+   apiVersion: dapr.io/v1alpha1
+   kind: Component
+   metadata:
+     name: local-secret-store
+     namespace: default
+   spec:
+     type: secretstores.local.localsecretstore
+     metadata:
+       - name: secretsFile
+         value: components/secrets.json
    ```
 
    This config file configures the file-based local secret-store. You have to specify the file containing the secrets in the metadata. Important to notice here, is that the file should be specified relative to the folder where the application is started (in this case the `Assignment05/src/TrafficControl` folder).
@@ -137,18 +137,18 @@ Now you're ready to add code to the TrafficControl service to read the API key f
 
 ## Step 3: Use the secret-store from the TrafficControl service
 
-1. Open the file `Assignment04/src/TrafficControlService/Controllers/TrafficController.cs` in VS Code.
+1. Open the file `Assignment05/src/TrafficControlService/Controllers/TrafficController.cs` in VS Code.
 
 2. Change the code for retrieving vehicle information at the beginning of the `VehicleEntry` method in this file:
 
    ```csharp
-    // get vehicle details
-    var apiKeySecret = await daprClient.GetSecretAsync("local-secret-store", "rdw-api-key");
-    var apiKey = apiKeySecret["rdw-api-key"];
-    var vehicleInfo = await daprClient.InvokeMethodAsync<VehicleInfo>(
-        "governmentservice",
-        $"rdw/{apiKey}/vehicle/{msg.LicenseNumber}",
-        new HTTPExtension { Verb = HTTPVerb.Get });
+   // get vehicle details
+   var apiKeySecret = await daprClient.GetSecretAsync("local-secret-store", "rdw-api-key");
+   var apiKey = apiKeySecret["rdw-api-key"];
+   var vehicleInfo = await daprClient.InvokeMethodAsync<VehicleInfo>(
+       "governmentservice",
+       $"rdw/{apiKey}/vehicle/{msg.LicenseNumber}",
+       new HTTPExtension { Verb = HTTPVerb.Get });
    ```
 
    As you can see, you first use the Dapr client to get the secret with key `rdw-api-key` from the local secret-store. This returns a dictionary of values. Then you get the API key from the dictionary and pass it in the service-to-service invocation.
@@ -205,18 +205,18 @@ To test whether the secret-store actually works, you will change the secret in t
    dapr run --app-id trafficcontrolservice --app-port 5000 --dapr-grpc-port 50001 --components-path ./components dotnet run
    ```
 
-5. Start the Simulation:
+5. Start the Simulation again from the `Assignment05/src/Simulation` folder:
 
    ```
-   dotnet run
+   dapr run --app-id simulation --dapr-grpc-port 50003 dotnet run
    ```
 
-Now you should see some errors in the logging because the TrafficControl service is no longer passing the correct API key:
+Now you should see some errors in the logging because the TrafficControl service is no longer passing the correct API key in the call to the Government service:
 
    ```
-    == APP ==       An unhandled exception has occurred while executing the request.
+   == APP ==       An unhandled exception has occurred while executing the request.
 
-    == APP == Grpc.Core.RpcException: Status(StatusCode=Unauthenticated, Detail="Unauthorized")
+   == APP == Grpc.Core.RpcException: Status(StatusCode=Unauthenticated, Detail="Unauthorized")
    ```
 
 Don't forget change the API key in the secrets file back to the correct API key.
