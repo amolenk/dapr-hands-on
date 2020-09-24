@@ -1,4 +1,4 @@
-# Assignment 2 - Add Dapr service invocation
+# Assignment 2 - Add Dapr service-to-service invocation
 
 ## Assignment goals
 

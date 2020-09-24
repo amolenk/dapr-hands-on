@@ -1,4 +1,4 @@
-# Assignment 2 - Add Dapr service invocation
+# Assignment 2 - Add Dapr service-to-service invocation
 
 In this assignment, you're going to add Dapr into the mix. You will use the **Service-to-service Invocation** building-block.
 

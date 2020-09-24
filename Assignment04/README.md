@@ -1,4 +1,4 @@
-# Assignment 4 - Add pub/sub messsaging
+# Assignment 4 - Add pub/sub messaging
 
 In this assignment, you're going to add Dapr **publish/subscribe** messaging to send messages from the simulation to the TrafficControl service and from the TrafficControl service to the Government service.
 

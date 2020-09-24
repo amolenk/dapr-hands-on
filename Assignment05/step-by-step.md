@@ -1,4 +1,4 @@
-# Assignment 5 - Add secrets
+# Assignment 5 - Add secrets management
 
 ## Assignment goals
 

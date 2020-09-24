@@ -2,7 +2,7 @@
 
 In this assignment, you're going to add Dapr **state management** in the TrafficControl service to store vehicle information.
 
-## Dapr State-management building block
+## Dapr State management building block
 
 Dapr offers key/value storage APIs for state management. If a microservice uses state management, it can use these APIs to leverage any of the supported state stores, without adding or learning a third party SDK.
 
